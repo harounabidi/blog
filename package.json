@@ -1,19 +1,37 @@
 {
-	"name": "blog",
-	"version": "0.0.0",
-	"private": true,
-	"scripts": {
-		"deploy": "wrangler deploy",
-		"dev": "wrangler dev",
-		"start": "wrangler dev",
-		"test": "vitest",
-		"cf-typegen": "wrangler types"
-	},
-	"devDependencies": {
-		"@cloudflare/vitest-pool-workers": "^0.8.19",
-		"@types/node": "^22.15.21",
-		"typescript": "^5.5.2",
-		"vitest": "~3.0.7",
-		"wrangler": "^4.16.1"
-	}
+  "name": "blog",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev --ip 0.0.0.0 --live-reload",
+    "dev:tailwind": "concurrently \"bunx @tailwindcss/cli -i ./styles/index.css -o ./dist/css/index.css --minify --watch\" \"bunx @tailwindcss/cli -i ./styles/vs-light.css -o ./dist/css/vs-light.css --minify --watch\" \"bunx @tailwindcss/cli -i ./styles/vs-dark.css -o ./dist/css/vs-dark.css --minify --watch\"",
+    "dev:js": "bun build ./src/js/script.ts --outdir ./dist --minify --watch",
+    "build": "wrangler build",
+    "cf-typegen": "wrangler types",
+    "drizzle:generate": "drizzle-kit generate",
+    "drizzle:migrate": "drizzle-kit migrate",
+    "drizzle:studio": "drizzle-kit studio",
+    "drizzle:studio:local": "drizzle-kit studio --config=drizzle.config.local.ts"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.8",
+    "drizzle-orm": "^0.44.1",
+    "hono": "^4.7.11",
+    "marked": "^15.0.12",
+    "marked-highlight": "^2.2.1",
+    "prismjs": "^1.30.0",
+    "sanitize-html": "^2.17.0",
+    "tailwindcss": "^4.1.8"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "@cloudflare/workers-types": "^4.20250601.0",
+    "@types/node": "^22.15.29",
+    "@types/prismjs": "^1.26.5",
+    "@types/sanitize-html": "^2.16.0",
+    "dotenv": "^16.5.0",
+    "drizzle-kit": "^0.31.1",
+    "wrangler": "^4.18.0"
+  }
 }

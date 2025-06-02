@@ -1,0 +1,1 @@
+ALTER TABLE `post` ADD `cover` text DEFAULT '' NOT NULL;

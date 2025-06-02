@@ -1,0 +1,194 @@
+@import "tailwindcss";
+@import "./md.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-border, currentColor);
+  }
+}
+
+:root {
+  --background-color: hsl(0, 0%, 100%);
+  --foreground-color: hsl(0, 0%, 17%);
+
+  --foreground-muted: hsl(0, 0%, 46%);
+
+  --backdrop: hsl(0, 0%, 0% / 0.2);
+
+  --pre-background-color: hsl(0, 0%, 98%);
+  --pre-border-color: hsl(0, 0%, 90%);
+
+  --border-color: hsl(0, 0%, 90%);
+}
+
+.dark {
+  --background-color: hsl(0, 0%, 10%);
+  --foreground-color: hsl(60, 30%, 96%);
+
+  --foreground-muted: hsl(0, 0%, 70%);
+
+  --backdrop: hsl(240, 6%, 10% / 0.72);
+
+  --pre-background-color: hsl(0, 0%, 15%);
+  --pre-border-color: hsl(0, 0%, 20%);
+
+  --border-color: hsl(0, 0%, 20%);
+}
+
+@theme {
+  --color-background: var(--background-color);
+  --color-foreground: var(--foreground-color);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-pre-background: var(--pre-background-color);
+  --color-pre-border: var(--pre-border-color);
+  --color-border: var(--border-color);
+}
+
+@layer utilities {
+  [popover]::backdrop {
+    background-color: var(--backdrop);
+    backdrop-filter: blur(4px);
+  }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  /* WebKit */
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+    background: transparent;
+    -webkit-appearance: none;
+  }
+  &::-webkit-scrollbar-thumb {
+    display: none;
+    width: 0;
+    height: 0;
+    background: transparent;
+    -webkit-appearance: none;
+  }
+  &::-webkit-scrollbar-track {
+    display: none;
+    width: 0;
+    height: 0;
+    background: transparent;
+    -webkit-appearance: none;
+  }
+  &::-webkit-scrollbar-track-piece {
+    display: none;
+    width: 0;
+    height: 0;
+    background: transparent;
+    -webkit-appearance: none;
+  }
+  &::-webkit-scrollbar-corner {
+    display: none;
+    width: 0;
+    height: 0;
+    background: transparent;
+    -webkit-appearance: none;
+  }
+  &::-webkit-resizer {
+    display: none;
+    width: 0;
+    height: 0;
+    background: transparent;
+    -webkit-appearance: none;
+  }
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans",
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  margin: 0;
+  padding: 0;
+  display: flex;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Header animation styles */
+header {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+header.header-hidden {
+  transform: translateY(-100%);
+}
+
+header.header-visible {
+  transform: translateY(0);
+}
+
+html:has(:popover-open) {
+  overflow: hidden;
+}
+
+pre {
+  @apply no-scrollbar;
+}
+
+input[type="email"] {
+  --bg-position: left 10px center;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='hsl(0, 0%, 17%)' d='M20 12a8 8 0 1 0-3.562 6.657l1.11 1.664A9.95 9.95 0 0 1 12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10v1.5a3.5 3.5 0 0 1-6.396 1.966A5 5 0 1 1 15 8h2v5.5a1.5 1.5 0 0 0 3 0zm-8-3a3 3 0 1 0 0 6a3 3 0 0 0 0-6'/%3E%3C/svg%3E");
+  background-position: var(--bg-position);
+  background-repeat: no-repeat;
+  background-size: 1.4em auto;
+  padding-left: 2.5em;
+  padding-right: 0;
+}
+
+.dark input[type="email"] {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M20 12a8 8 0 1 0-3.562 6.657l1.11 1.664A9.95 9.95 0 0 1 12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10v1.5a3.5 3.5 0 0 1-6.396 1.966A5 5 0 1 1 15 8h2v5.5a1.5 1.5 0 0 0 3 0zm-8-3a3 3 0 1 0 0 6a3 3 0 0 0 0-6'/%3E%3C/svg%3E");
+}
+
+.category-active {
+  color: var(--color-foreground) !important;
+  position: relative;
+  font-weight: 600;
+}
+
+.category-active::after {
+  content: "•";
+  position: absolute;
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1em;
+  /* color: var(--color-foreground); */
+}
+
+.category-inactive {
+  /* color: var(--color-foreground-muted); */
+  opacity: 0.7;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.category-inactive::before {
+  content: attr(data-text);
+  font-weight: 600;
+  height: 0;
+  visibility: hidden;
+  overflow: hidden;
+  user-select: none;
+  pointer-events: none;
+  display: block;
+}
+
+.category-inactive:hover {
+  color: var(--color-foreground);
+  opacity: 1;
+}

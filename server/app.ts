@@ -1,0 +1,155 @@
+import { Hono } from "hono"
+import { Env } from "../types/env"
+// import { csrf } from "hono/csrf"
+import NotFound from "../src/pages/not-found"
+import { logger } from "hono/logger"
+import OG from "@/components/og"
+import { drizzle } from "drizzle-orm/d1"
+import { category, post } from "@/schemas/drizzle"
+import { eq } from "drizzle-orm"
+
+export function Router() {
+  return new Hono<{ Bindings: Env }>({
+    strict: false,
+  })
+}
+
+export default function App() {
+  const app = Router()
+
+  // Security headers middleware
+  // app.use(
+  //   "*",
+  //   secureHeaders({
+  //     contentSecurityPolicy: {
+  //       defaultSrc: ["'self'"],
+  //       styleSrc: ["'self'", "'unsafe-inline'"],
+  //       scriptSrc: ["'self'"],
+  //       imgSrc: ["'self'", "data:", "https:"],
+  //       connectSrc: ["'self'"],
+  //       fontSrc: ["'self'"],
+  //       objectSrc: ["'none'"],
+  //       mediaSrc: ["'self'"],
+  //       frameSrc: ["'none'"],
+  //     },
+  //     crossOriginEmbedderPolicy: false, // Disable for Cloudflare Pages
+  //   })
+  // )
+
+  // Enable CSRF protection for state-changing operations
+  // app.use("/post/*", csrf())
+
+  app.use("*", logger())
+
+  app.get("/robots.txt", (c) => {
+    return c.text("User-agent: *\nDisallow: /api/", 200, {
+      "Content-Type": "text/plain",
+    })
+  })
+
+  app.get("/manifest.webmanifest", (c) => {
+    return c.json(
+      {
+        name: "Haroun Abidi's Blog",
+        short_name: "Haroun Abidi",
+        description: "A blog about web development, programming, and more.",
+        start_url: "/",
+        display: "standalone",
+        background_color: "#ffffff",
+        theme_color: "#000000",
+        icons: [
+          {
+            src: "/favicon/android-chrome-192x192.png",
+            sizes: "192x192",
+            type: "image/png",
+          },
+          {
+            src: "/favicon/android-chrome-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+          },
+          {
+            src: "/favicon/favicon-32x32.png",
+            sizes: "32x32",
+            type: "image/png",
+          },
+          {
+            src: "/favicon/favicon-16x16.png",
+            sizes: "16x16",
+            type: "image/png",
+          },
+        ],
+      },
+      200,
+      { "Content-Type": "application/manifest+json" }
+    )
+  })
+
+  app.get("/sitemap.xml", async (c) => {
+    const db = drizzle(c.env.DB)
+    const posts = await db
+      .select({
+        slug: post.slug,
+        categorySlug: category.slug,
+      })
+      .from(post)
+      .innerJoin(category, eq(post.categoryId, category.id))
+      .orderBy(post.createdAt)
+
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      <url>
+        <loc>https://blog.harounabidi.com/</loc>
+        <lastmod>${new Date().toISOString()}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+      </url>
+      <url>
+        <loc>https://blog.harounabidi.com/about-me</loc>
+        <lastmod>${new Date().toISOString()}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+      </url>
+      <url>
+        <loc>https://blog.harounabidi.com/about-blog</loc>
+        <lastmod>${new Date().toISOString()}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+      </url>
+      <url>
+        <loc>https://blog.harounabidi.com/contact</loc>
+        <lastmod>${new Date().toISOString()}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+      </url>
+      ${posts
+        .map(
+          (post) => `<url>
+        <loc>https://blog.harounabidi.com/${post.categorySlug}/${
+            post.slug
+          }</loc>
+        <lastmod>${new Date().toISOString()}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+      </url>`
+        )
+        .join("")}
+    </urlset>`
+
+    return c.text(sitemap, 200, {
+      "Content-Type": "application/xml",
+    })
+  })
+
+  app.get("/og.svg", (c) => {
+    return c.html(OG({}), 200, {
+      "Content-Type": "image/svg+xml",
+    })
+  })
+
+  app.notFound((c) => {
+    return c.html(NotFound(), 404)
+  })
+
+  return app
+}
