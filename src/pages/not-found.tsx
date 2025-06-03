@@ -16,12 +16,6 @@ export default function NotFound() {
             sizes='16x16'
           />
           <link href='/css/index.css' rel='stylesheet'></link>
-          <link
-            rel='icon'
-            href='/favicon/favicon.ico'
-            type='image/x-icon'
-            sizes='48x48'
-          />
         </head>
         <body class='bg-background text-foreground'>
           <main class='max-w-[45rem] h-svh grid place-items-center my-4 mx-auto px-4'>

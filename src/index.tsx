@@ -19,10 +19,10 @@ const routes = [
   aboutBlog,
   contact,
   thankYou,
+  subscribe,
   rss,
   post,
   category,
-  subscribe,
 ]
 
 routes.forEach((route) => {

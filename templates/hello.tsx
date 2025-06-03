@@ -88,8 +88,8 @@ export default function helloNewSubscriber({
                   I’ll be delivering value in the name of practical advice that
                   can help you level up your coding skills.
                 </p>
-                <h2 style='margin-bottom: 20px; font-size: 18px; font-weight: 700;'>
-                  Most recent posts
+                <h2 style='margin-bottom: 20px; font-size: 20px; font-weight: 700;'>
+                  Most recent posts 📝
                 </h2>
 
                 <ul style='list-style: none;'>
@@ -138,7 +138,7 @@ export default function helloNewSubscriber({
 
             <tr>
               <td style='padding: 20px; font-size: 12px; color: var(--fg-muted); border-top: 1px solid var(--border-color);'>
-                <p style='font-size: small;'>
+                <p style='font-size: small; max-width: 360px; margin: 0 auto; line-height: 1.5; text-align: center;'>
                   You are receiving this email because you subscribed to my{" "}
                   <a
                     href={`${url}`}
@@ -149,7 +149,7 @@ export default function helloNewSubscriber({
                   . If you didn't subscribe, you can safely ignore this email.
                   you can also{" "}
                   <a
-                    href={`${url}/unsubscribe?email=${email}`}
+                    href={`${url}/unsubscribe/${email}`}
                     target='_blank'
                     style='color: var(--fg-muted); text-decoration: underline; font-weight: 600;'>
                     Unsubscribe

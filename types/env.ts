@@ -4,6 +4,7 @@ export interface Env {
   ZEPTOMAIL_FROM: string
   API_KEY: string
   NODE_ENV: string
+  ENCRYPTION_KEY: string
   DB: D1Database
   ASSETS: {
     fetch: (request: Request) => Promise<Response>
