@@ -3,8 +3,6 @@ import { drizzle } from "drizzle-orm/d1"
 import { category, post } from "@/schemas/drizzle"
 import { eq } from "drizzle-orm"
 import HomePage from "../pages/home"
-import helloNewSubscriber from "@/templates/hello"
-import { encryptWithPassword } from "@/utils/hash"
 
 const router = Router()
 
@@ -35,27 +33,17 @@ router.get("/", async (c) => {
   const categories = await db.select().from(category).orderBy(category.name)
 
   // return the markup from kv
-  // const cachedHomePage = await c.env.KV.get("home")
-  // if (cachedHomePage) {
-  //   return c.html(cachedHomePage)
-  // }
+  const cachedHomePage = await c.env.KV.get("home")
+  if (cachedHomePage) {
+    return c.html(cachedHomePage)
+  }
 
-  // // If not cached, return the generated page
-  // const pageContent = await HomePage({ posts, categories })
-  // const htmlContent = pageContent.toString()
-  // await c.env.KV.put("home", htmlContent)
+  // If not cached, return the generated page
+  const pageContent = await HomePage({ posts, categories })
+  const htmlContent = pageContent.toString()
+  await c.env.KV.put("home", htmlContent)
 
-  const encryptedEmail = await encryptWithPassword(
-    "harooonabidi@gmail.com",
-    c.env.ENCRYPTION_KEY
-  )
-  return c.html(
-    helloNewSubscriber({
-      url: "https://blog.harounabidi.com",
-      email: encryptedEmail,
-      posts,
-    })
-  )
+  return c.html(htmlContent)
 })
 
 export default router
