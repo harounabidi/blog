@@ -10,7 +10,7 @@ router.get("/", async (c) => {
   const db = drizzle(c.env.DB)
 
   // Join posts with categories to get category slug for each post
-  const postsWithCategories = await db
+  const posts = await db
     .select({
       id: post.id,
       title: post.title,
@@ -32,7 +32,18 @@ router.get("/", async (c) => {
 
   const categories = await db.select().from(category).orderBy(category.name)
 
-  return c.html(HomePage({ posts: postsWithCategories, categories }))
+  // return the markup from kv
+  const cachedHomePage = await c.env.KV.get("home")
+  if (cachedHomePage) {
+    return c.html(cachedHomePage)
+  }
+
+  // If not cached, return the generated page
+  const pageContent = await HomePage({ posts, categories })
+  const htmlContent = pageContent.toString()
+  await c.env.KV.put("home", htmlContent)
+
+  return c.html(htmlContent)
 })
 
 export default router

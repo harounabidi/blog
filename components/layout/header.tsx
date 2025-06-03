@@ -38,14 +38,14 @@ export default function Header({ categories }: { categories: Category[] }) {
             type='search'
             autofocus
             placeholder='Search...'
-            class='border rounded-md px-3 h-12 w-full bg-background text-foreground max-w-md outline-none focus:ring-1 focus:ring-foreground transition-colors duration-200'
+            class='border rounded-sm px-3 h-12 w-full bg-background text-foreground max-w-md outline-none focus:ring-1 focus:ring-foreground transition-colors duration-200'
           />
           <button
             popovertarget='search-popover'
             popovertargetaction='hide'
             aria-label='Close search'
             type='button'
-            class='p-2 rounded-md h-12 w-12 flex items-center justify-center cursor-pointer'>
+            class='p-2 rounded-sm h-12 w-12 flex items-center justify-center cursor-pointer'>
             <Close class='w-5 h-5 text-foreground' />
           </button>
         </form>

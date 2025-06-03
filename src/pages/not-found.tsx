@@ -32,7 +32,7 @@ export default function NotFound() {
               </p>
               <a
                 href='/'
-                class='bg-foreground text-background px-3 py-1.5 rounded-md text-sm font-semibold flex w-fit mt-4'>
+                class='bg-foreground text-background px-3 py-1.5 rounded-sm text-sm font-semibold flex w-fit mt-4'>
                 Go Home
               </a>
             </div>

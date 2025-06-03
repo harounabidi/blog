@@ -30,7 +30,18 @@ const Layout: FC = (props) => {
             rel='canonical'
             href={props.canonical || "https://blog.harounabidi.com"}
           />
-          {/* <meta name='referrer' content='origin-when-cross-origin' /> */}
+
+          {/* <meta
+            name='theme-color'
+            media='(prefers-color-scheme: dark)'
+            content='#1a1a1a'
+          />
+
+          <meta
+            name='theme-color'
+            media='(prefers-color-scheme: light)'
+            content='#ffffff'
+          /> */}
 
           <link
             rel='alternate'

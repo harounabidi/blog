@@ -65,6 +65,14 @@ class ThemeManager {
     document.head.appendChild(link)
   }
 
+  // add theme to header
+  private addThemeToHeader(theme: Theme): void {
+    const { html } = this.elements
+    if (!html) return
+    html.classList.add(theme)
+    html.classList.remove(theme === "dark" ? "light" : "dark")
+  }
+
   private applyTheme(theme: Theme): void {
     const { html } = this.elements
     if (!html) return
@@ -73,6 +81,7 @@ class ThemeManager {
     html.classList.toggle("dark", isDarkMode)
     this.updateIconsVisibility(isDarkMode)
     this.updateThemeLinks(isDarkMode)
+    this.addThemeToHeader(theme)
   }
 
   private toggleTheme(): void {
@@ -186,16 +195,21 @@ class SubscribeToNewsletter {
 
   private async handleSubmit() {
     const formData = new FormData(this.form!)
+
     this.loader?.classList.add("visible")
     this.loader?.classList.remove("invisible")
     this.button?.classList.add("invisible")
 
-    await fetch("/subscribe", {
+    const response = await fetch("/subscribe", {
       method: "POST",
       body: formData,
-    }).then(() => {
-      window.location.href = "/"
     })
+
+    if (!response.ok) {
+      window.location.href = "/"
+    } else {
+      window.location.href = "/thank-you"
+    }
 
     this.button?.classList.remove("invisible")
     this.loader?.classList.add("invisible")

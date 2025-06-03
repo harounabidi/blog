@@ -10,7 +10,7 @@ export default function AboutMePage({
     <Layout
       categories={categories}
       description='About Haroun Abidi'
-      keywords=''>
+      keywords='Haroun Abidi, software developer, about me'>
       <section class='max-w-[45rem] space-y-4 my-2 mx-auto px-4'>
         <h1 class='text-2xl font-bold'>About Me</h1>
         <p>

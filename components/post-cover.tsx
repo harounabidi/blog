@@ -4,7 +4,7 @@ export default function PostCover({ cover }: { cover: string }) {
       <img
         src={cover}
         alt='Post Cover'
-        className='w-full object-cover h-full rounded-lg'
+        className='w-full object-cover h-full rounded-sm'
         loading='eager'
         decoding='async'
         width={800}

@@ -98,6 +98,8 @@ router.post("/post", authenticateApiKey, async (c) => {
       return c.json({ error: "Failed to create post" }, 500)
     }
 
+    await c.env.KV.delete("home") // Invalidate cache for home page
+
     return c.json({
       message: "Post created successfully",
       post: {

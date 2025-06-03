@@ -192,3 +192,10 @@ input[type="email"] {
   color: var(--color-foreground);
   opacity: 1;
 }
+
+/* Hide footer when app is running in standalone mode (PWA) */
+@media (display-mode: standalone) {
+  footer {
+    display: none;
+  }
+}

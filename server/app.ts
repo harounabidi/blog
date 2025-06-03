@@ -55,8 +55,8 @@ export default function App() {
         description: "A blog about web development, programming, and more.",
         start_url: "/",
         display: "standalone",
-        background_color: "#ffffff",
-        theme_color: "#000000",
+        // background_color: "hsl(0, 0%, 10%)",
+        // theme_color: "hsl(0, 0%, 10%)",
         icons: [
           {
             src: "/favicon/android-chrome-192x192.png",

@@ -9,6 +9,12 @@
     "binding": "ASSETS",
     "directory": "dist"
   },
+  "kv_namespaces": [
+    {
+      "binding": "KV",
+      "id": "a38d547286d1404bb028f6b3f0eec628"
+    }
+  ],
   "d1_databases": [
     {
       "binding": "DB",

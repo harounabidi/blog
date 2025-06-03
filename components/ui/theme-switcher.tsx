@@ -6,7 +6,7 @@ export default function ThemeSwitcher() {
     <button
       type='button'
       id='theme-toggle'
-      class='cursor-pointer grid [grid-template-areas:"stack"] rounded-full py-5'
+      class='cursor-pointer grid [grid-template-areas:"stack"] py-5'
       aria-label='Toggle dark mode'
       aria-pressed='false'
       title='Toggle dark mode'>

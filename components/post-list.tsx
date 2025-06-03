@@ -34,7 +34,7 @@ export default function PostList({ posts }: { posts: Post[] }) {
               <img
                 src={post.cover}
                 alt={post.title}
-                class='w-full h-full object-cover rounded-lg'
+                class='w-full h-full object-cover rounded-sm'
                 loading='eager'
               />
             </div>

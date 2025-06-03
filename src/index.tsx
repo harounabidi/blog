@@ -5,6 +5,7 @@ import subscribe from "./routes/subscribe"
 import aboutBlog from "./routes/about-blog"
 import aboutMe from "./routes/about-me"
 import contact from "./routes/contact"
+import thankYou from "./routes/thank-you"
 import rss from "./routes/rss"
 
 import index from "./routes"
@@ -17,6 +18,7 @@ const routes = [
   aboutMe,
   aboutBlog,
   contact,
+  thankYou,
   rss,
   post,
   category,
