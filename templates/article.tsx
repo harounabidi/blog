@@ -5,14 +5,14 @@ import { Article } from "@/types/article"
 import { css, Style } from "hono/css"
 import { html } from "hono/html"
 
-export default function helloNewSubscriber({
+export default function Article({
   url,
   email,
-  articles,
+  article,
 }: {
   url: string
   email: string
-  articles: Article[]
+  article: Article
 }) {
   return (
     <>
@@ -24,7 +24,7 @@ export default function helloNewSubscriber({
             name='viewport'
             content='width=device-width, initial-scale=1.0'
           />
-          <title>Welcome to my Newsletter</title>
+          <title>${article.title}</title>
           <link rel='icon' type='image/x-icon' href={`${url}/favicon.ico`} />
           <Style>
             {css`
@@ -91,48 +91,6 @@ export default function helloNewSubscriber({
                 <h2 style='margin-bottom: 20px; font-size: 20px; font-weight: 700;'>
                   Most recent articles 📝
                 </h2>
-
-                <ul style='list-style: none; list-style-position: inside; margin: 0; padding: 0;'>
-                  {articles.map((article) => (
-                    <li style='margin-bottom: 5px;'>
-                      <a
-                        href={`${url}/${article.categorySlug}/${article.slug}`}
-                        target='_blank'
-                        key={article.id}
-                        style='display: flex; justify-content: space-between; padding: 16px 0; gap: 16px; text-decoration: none; color: inherit;'>
-                        <div>
-                          <h3 style='margin-bottom: 8px; font-size: 16px; font-weight: 600;'>
-                            {article.title}
-                          </h3>
-                          <p style='margin-bottom: 8px; font-size: 14px; color: var(--fg-muted);'>
-                            {new Date(article.createdAt).toLocaleDateString(
-                              "en-UK",
-                              {
-                                year: "numeric",
-                                month: "short",
-                                day: "numeric",
-                              }
-                            )}{" "}
-                            • 📖 {article.readingTime} min read
-                          </p>
-                          <p style='margin-top: 4px; color: var(--fg-muted); overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3;'>
-                            {article.summary}
-                          </p>
-                        </div>
-                        {article.cover && (
-                          <div style='position: relative; width: 96px; height: 96px; overflow: hidden; flex-shrink: 0; display: flex;'>
-                            <img
-                              src={`${url}${article.cover}`}
-                              alt={article.title}
-                              style='width: 100%; height: 100%; object-fit: cover; border-radius: 4px;'
-                              loading='eager'
-                            />
-                          </div>
-                        )}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
               </td>
             </tr>
 

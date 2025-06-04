@@ -39,64 +39,59 @@ router.get("/rss.xml", async (c) => {
 
   // Generate RSS XML
   const rssXml = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>Haroun Abidi's Blog</title>
-    <description>Short tutorials for developers. Next.js, React, CSS, Animation, and more!</description>
-    <link>${baseUrl}</link>
-    <atom:link href="${baseUrl}/rss.xml" rel="self" type="application/rss+xml" />
-    <language>en-us</language>
-    <lastBuildDate>${lastBuildDate}</lastBuildDate>
-    <pubDate>${lastPubDate}</pubDate>
-    <ttl>1440</ttl>
-    <managingEditor>haroun@harounabidi.com (Haroun Abidi)</managingEditor>
-    <webMaster>haroun@harounabidi.com (Haroun Abidi)</webMaster>
-    <copyright>Copyright © ${new Date().getFullYear()} Haroun Abidi</copyright>
-    <category>Technology</category>
-    <category>Programming</category>
-    <category>Web Development</category>
-    <image>
-      <url>${baseUrl}/favicon.ico</url>
-      <title>Haroun Abidi's Blog</title>
-      <link>${baseUrl}</link>
-    </image>
-${articles
-  .map((article) => {
-    const articleUrl = `${baseUrl}/${article.categorySlug}/${article.slug}`
-    const pubDate = new Date(
-      article.publishedAt || article.createdAt
-    ).toUTCString()
+    <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+      <channel>
+        <title>Haroun Abidi's Blog</title>
+        <description>Short tutorials for developers. Next.js, React, CSS, Animation, and more!</description>
+        <link>${baseUrl}</link>
+        <atom:link href="${baseUrl}/rss.xml" rel="self" type="application/rss+xml" />
+        <language>en-us</language>
+        <lastBuildDate>${lastBuildDate}</lastBuildDate>
+        <pubDate>${lastPubDate}</pubDate>
+        <ttl>1440</ttl>
+        <managingEditor>haroun@harounabidi.com (Haroun Abidi)</managingEditor>
+        <webMaster>haroun@harounabidi.com (Haroun Abidi)</webMaster>
+        <copyright>Copyright © ${new Date().getFullYear()} Haroun Abidi</copyright>
+        <category>Technology</category>
+        <category>Programming</category>
+        <category>Web Development</category>
+        <image>
+          <url>${baseUrl}/favicon/favicon-32x32.png</url>
+          <title>Haroun Abidi's Blog</title>
+          <link>${baseUrl}</link>
+        </image>
+          ${articles
+            .map((article) => {
+              const articleUrl = `${baseUrl}/${article.categorySlug}/${article.slug}`
+              const pubDate = new Date(
+                article.publishedAt || article.createdAt
+              ).toUTCString()
+              const escapeXml = (str: string) =>
+                str
+                  .replace(/&/g, "&amp;")
+                  .replace(/</g, "&lt;")
+                  .replace(/>/g, "&gt;")
+                  .replace(/"/g, "&quot;")
+                  .replace(/'/g, "&#39;")
+              return `<item>
+              <title>${escapeXml(article.title)}</title>
+              <description>${escapeXml(article.summary)}</description>
+              <link>${articleUrl}</link>
+              <guid isPermaLink="true">${articleUrl}</guid>
+              <pubDate>${pubDate}</pubDate>
+              <category>${escapeXml(article.categoryName)}</category>
+              <content:encoded>
+                <![CDATA[${parseMarkdown(article.content).replace(/\n/g, "")}]]>
+              </content:encoded>
+            </item>`
+            })
+            .join("\n")}
+      </channel>
+    </rss>`
 
-    // Escape XML special characters
-    const escapeXml = (str: string) =>
-      str
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;")
-
-    return `    <item>
-      <title>${escapeXml(article.title)}</title>
-      <description>${escapeXml(article.summary)}</description>
-      <link>${articleUrl}</link>
-      <guid isPermaLink="true">${articleUrl}</guid>
-      <pubDate>${pubDate}</pubDate>
-      <category>${escapeXml(article.categoryName)}</category>
-      <content:encoded><![CDATA[${parseMarkdown(article.content).replace(
-        /\n/g,
-        "\n  "
-      )}]]></content:encoded>
-    </item>`
+  return c.text(rssXml, 200, {
+    "Content-Type": "application/xml",
+    "Cache-Control": "public, max-age=3600",
   })
-  .join("\n")}
-  </channel>
-</rss>`
-
-  // Set appropriate headers for RSS
-  c.header("Content-Type", "application/rss+xml; charset=utf-8")
-  c.header("Cache-Control", "public, max-age=3600") // Cache for 1 hour
-
-  return c.text(rssXml)
 })
 export default router
