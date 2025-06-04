@@ -1,6 +1,6 @@
 import { Router } from "../../server/app"
 import { drizzle } from "drizzle-orm/d1"
-import { category, post } from "@/schemas/drizzle"
+import { category, article } from "@/schemas/drizzle"
 import { eq } from "drizzle-orm"
 import HomePage from "../pages"
 
@@ -9,26 +9,26 @@ const router = Router()
 router.get("/", async (c) => {
   const db = drizzle(c.env.DB)
 
-  // Join posts with categories to get category slug for each post
-  const posts = await db
+  // Join articles with categories to get category slug for each article
+  const articles = await db
     .select({
-      id: post.id,
-      title: post.title,
-      cover: post.cover,
-      slug: post.slug,
-      content: post.content,
-      summary: post.summary,
-      readingTime: post.readingTime,
-      status: post.status,
-      publishedAt: post.publishedAt,
-      createdAt: post.createdAt,
-      updatedAt: post.updatedAt,
-      categoryId: post.categoryId,
+      id: article.id,
+      title: article.title,
+      cover: article.cover,
+      slug: article.slug,
+      content: article.content,
+      summary: article.summary,
+      readingTime: article.readingTime,
+      status: article.status,
+      publishedAt: article.publishedAt,
+      createdAt: article.createdAt,
+      updatedAt: article.updatedAt,
+      categoryId: article.categoryId,
       categorySlug: category.slug,
     })
-    .from(post)
-    .innerJoin(category, eq(post.categoryId, category.id))
-    .orderBy(post.createdAt)
+    .from(article)
+    .innerJoin(category, eq(article.categoryId, category.id))
+    .orderBy(article.createdAt)
 
   const categories = await db.select().from(category).orderBy(category.name)
 
@@ -39,7 +39,7 @@ router.get("/", async (c) => {
   }
 
   // If not cached, return the generated page
-  const pageContent = await HomePage({ posts, categories })
+  const pageContent = await HomePage({ articles, categories })
   const htmlContent = pageContent.toString()
   await c.env.KV.put("home", htmlContent, {
     expirationTtl: 60 * 60 * 24, // Cache for 1 day

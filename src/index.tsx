@@ -1,5 +1,5 @@
 import App from "../server/app"
-import post from "./routes/article"
+import article from "./routes/article"
 import category from "./routes/category"
 import subscribe from "./routes/subscribe"
 import about from "./routes/about"
@@ -20,7 +20,7 @@ const routes = [
   thankYou,
   subscribe,
   rss,
-  post,
+  article,
   category,
 ]
 

@@ -1,18 +1,18 @@
 import At from "@/components/icons/at"
 import GitHub from "@/components/icons/github"
 import Linkedin from "@/components/icons/linkedin"
-import { Post } from "@/types/post"
+import { Article } from "@/types/article"
 import { css, Style } from "hono/css"
 import { html } from "hono/html"
 
 export default function helloNewSubscriber({
   url,
   email,
-  posts,
+  articles,
 }: {
   url: string
   email: string
-  posts: Post[]
+  articles: Article[]
 }) {
   return (
     <>
@@ -89,23 +89,23 @@ export default function helloNewSubscriber({
                   can help you level up your coding skills.
                 </p>
                 <h2 style='margin-bottom: 20px; font-size: 20px; font-weight: 700;'>
-                  Most recent posts 📝
+                  Most recent articles 📝
                 </h2>
 
                 <ul style='list-style: none;'>
-                  {posts.map((post) => (
+                  {articles.map((article) => (
                     <li style='margin-bottom: 5px;'>
                       <a
-                        href={`${url}/${post.categorySlug}/${post.slug}`}
+                        href={`${url}/${article.categorySlug}/${article.slug}`}
                         target='_blank'
-                        key={post.id}
+                        key={article.id}
                         style='display: flex; justify-content: space-between; padding: 16px 0; gap: 16px; text-decoration: none; color: inherit;'>
                         <div>
                           <h3 style='margin-bottom: 8px; font-size: 16px; font-weight: 600;'>
-                            {post.title}
+                            {article.title}
                           </h3>
                           <p style='margin-bottom: 8px; font-size: 14px; color: var(--fg-muted);'>
-                            {new Date(post.createdAt).toLocaleDateString(
+                            {new Date(article.createdAt).toLocaleDateString(
                               "en-UK",
                               {
                                 year: "numeric",
@@ -113,17 +113,17 @@ export default function helloNewSubscriber({
                                 day: "numeric",
                               }
                             )}{" "}
-                            • 📖 {post.readingTime} min read
+                            • 📖 {article.readingTime} min read
                           </p>
                           <p style='margin-top: 4px; color: var(--fg-muted); overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3;'>
-                            {post.summary}
+                            {article.summary}
                           </p>
                         </div>
-                        {post.cover && (
+                        {article.cover && (
                           <div style='position: relative; width: 96px; height: 96px; overflow: hidden; flex-shrink: 0; display: flex;'>
                             <img
-                              src={`${url}${post.cover}`}
-                              alt={post.title}
+                              src={`${url}${article.cover}`}
+                              alt={article.title}
                               style='width: 100%; height: 100%; object-fit: cover; border-radius: 4px;'
                               loading='eager'
                             />

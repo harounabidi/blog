@@ -5,7 +5,7 @@ import NotFound from "../src/pages/404"
 import { logger } from "hono/logger"
 import OG from "@/components/og"
 import { drizzle } from "drizzle-orm/d1"
-import { category, post } from "@/schemas/drizzle"
+import { category, article } from "@/schemas/drizzle"
 import { eq } from "drizzle-orm"
 
 export function Router() {
@@ -37,7 +37,7 @@ export default function App() {
   // )
 
   // Enable CSRF protection for state-changing operations
-  // app.use("/post/*", csrf())
+  // app.use("/article/*", csrf())
 
   app.use("*", logger())
 
@@ -87,14 +87,14 @@ export default function App() {
 
   app.get("/sitemap.xml", async (c) => {
     const db = drizzle(c.env.DB)
-    const posts = await db
+    const articles = await db
       .select({
-        slug: post.slug,
+        slug: article.slug,
         categorySlug: category.slug,
       })
-      .from(post)
-      .innerJoin(category, eq(post.categoryId, category.id))
-      .orderBy(post.createdAt)
+      .from(article)
+      .innerJoin(category, eq(article.categoryId, category.id))
+      .orderBy(article.createdAt)
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -122,11 +122,11 @@ export default function App() {
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
       </url>
-      ${posts
+      ${articles
         .map(
-          (post) => `<url>
-        <loc>https://blog.harounabidi.com/${post.categorySlug}/${
-            post.slug
+          (article) => `<url>
+        <loc>https://blog.harounabidi.com/${article.categorySlug}/${
+            article.slug
           }</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>daily</changefreq>

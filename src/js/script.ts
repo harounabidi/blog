@@ -120,9 +120,9 @@ class ScrollHeaderManager {
     this.header = document.querySelector("header")
   }
 
-  private isBlogPostPage(): boolean {
+  private isBlogArticlePage(): boolean {
     const pathname = window.location.pathname
-    // Check if the path matches the pattern /category-slug/post-slug
+    // Check if the path matches the pattern /category-slug/article-slug
     // This means exactly 2 segments after the root, and not ending with a slash
     const segments = pathname.split("/").filter((segment) => segment.length > 0)
     return segments.length === 2 && !pathname.endsWith("/")
@@ -131,8 +131,8 @@ class ScrollHeaderManager {
   private updateHeaderVisibility(): void {
     if (!this.header) return
 
-    // Only apply scroll-based hiding on blog post pages
-    if (!this.isBlogPostPage()) {
+    // Only apply scroll-based hiding on blog article pages
+    if (!this.isBlogArticlePage()) {
       this.showHeader()
       return
     }
@@ -241,7 +241,7 @@ class HeaderNavigationManager {
       this.homeLink.classList.add("hidden")
       this.categories.classList.remove("hidden")
     } else {
-      // On post pages: show home-link, hide categories
+      // On article pages: show home-link, hide categories
       this.homeLink.classList.remove("hidden")
       this.categories.classList.add("hidden")
     }
@@ -358,7 +358,7 @@ class CategoryActiveManager {
       return segments[0]
     }
 
-    // If on a post page, extract category from the first segment
+    // If on a article page, extract category from the first segment
     if (segments.length === 2) {
       return segments[0]
     }

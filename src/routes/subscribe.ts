@@ -1,6 +1,6 @@
 import { Router } from "@/server/app"
 import { drizzle } from "drizzle-orm/d1"
-import { category, post, subscriber } from "@/schemas/drizzle"
+import { category, article, subscriber } from "@/schemas/drizzle"
 import { eq } from "drizzle-orm"
 import { mail } from "@/utils/mail"
 import { encryptWithPassword, decryptWithPassword } from "@/utils/hash"
@@ -54,25 +54,25 @@ router.post("/subscribe", async (c) => {
     return c.json({ error: "Failed to subscribe" }, 500)
   }
 
-  const posts = await db
+  const articles = await db
     .select({
-      id: post.id,
-      title: post.title,
-      cover: post.cover,
-      slug: post.slug,
-      content: post.content,
-      summary: post.summary,
-      readingTime: post.readingTime,
-      status: post.status,
-      publishedAt: post.publishedAt,
-      createdAt: post.createdAt,
-      updatedAt: post.updatedAt,
-      categoryId: post.categoryId,
+      id: article.id,
+      title: article.title,
+      cover: article.cover,
+      slug: article.slug,
+      content: article.content,
+      summary: article.summary,
+      readingTime: article.readingTime,
+      status: article.status,
+      publishedAt: article.publishedAt,
+      createdAt: article.createdAt,
+      updatedAt: article.updatedAt,
+      categoryId: article.categoryId,
       categorySlug: category.slug,
     })
-    .from(post)
-    .innerJoin(category, eq(post.categoryId, category.id))
-    .orderBy(post.createdAt)
+    .from(article)
+    .innerJoin(category, eq(article.categoryId, category.id))
+    .orderBy(article.createdAt)
     .limit(5)
 
   // Encrypt email for unsubscribe link
@@ -81,7 +81,7 @@ router.post("/subscribe", async (c) => {
   const body = helloNewSubscriber({
     url: "https://blog.harounabidi.com",
     email: encryptedEmail,
-    posts,
+    articles,
   })
 
   // Get plain HTML string directly from the component

@@ -1,6 +1,6 @@
 import { Router } from "../../server/app"
 import { drizzle } from "drizzle-orm/d1"
-import { category, post } from "@/schemas/drizzle"
+import { category, article } from "@/schemas/drizzle"
 import { eq, desc } from "drizzle-orm"
 import { parseMarkdown } from "@/utils/parse-md"
 
@@ -9,32 +9,31 @@ const router = Router()
 router.get("/rss.xml", async (c) => {
   const db = drizzle(c.env.DB)
 
-  // Get all published posts with their categories
-  const postsWithCategories = await db
+  // Get all published articles with their categories
+  const articles = await db
     .select({
-      id: post.id,
-      title: post.title,
-      slug: post.slug,
-      content: post.content,
-      summary: post.summary,
-      publishedAt: post.publishedAt,
-      createdAt: post.createdAt,
-      updatedAt: post.updatedAt,
+      id: article.id,
+      title: article.title,
+      slug: article.slug,
+      content: article.content,
+      summary: article.summary,
+      publishedAt: article.publishedAt,
+      createdAt: article.createdAt,
+      updatedAt: article.updatedAt,
       categorySlug: category.slug,
       categoryName: category.name,
     })
-    .from(post)
-    .innerJoin(category, eq(post.categoryId, category.id))
-    // .where(eq(post.status, "published"))
-    .orderBy(desc(post.publishedAt))
-    .limit(50) // Limit to last 50 posts
+    .from(article)
+    .innerJoin(category, eq(article.categoryId, category.id))
+    .orderBy(desc(article.publishedAt))
+    .limit(50) // Limit to last 50 articles
 
   const baseUrl = "https://blog.harounabidi.com"
   const lastBuildDate = new Date().toUTCString()
-  const mostRecentPost = postsWithCategories[0] // Get the most recent (first in DESC ordered array)
-  const lastPubDate = mostRecentPost
+  const mostRecentArticle = articles[0] // Get the most recent (first in DESC ordered array)
+  const lastPubDate = mostRecentArticle
     ? new Date(
-        mostRecentPost.publishedAt || mostRecentPost.createdAt
+        mostRecentArticle.publishedAt || mostRecentArticle.createdAt
       ).toUTCString()
     : lastBuildDate
 
@@ -61,10 +60,12 @@ router.get("/rss.xml", async (c) => {
       <title>Haroun Abidi's Blog</title>
       <link>${baseUrl}</link>
     </image>
-${postsWithCategories
-  .map((post) => {
-    const postUrl = `${baseUrl}/${post.categorySlug}/${post.slug}`
-    const pubDate = new Date(post.publishedAt || post.createdAt).toUTCString()
+${articles
+  .map((article) => {
+    const articleUrl = `${baseUrl}/${article.categorySlug}/${article.slug}`
+    const pubDate = new Date(
+      article.publishedAt || article.createdAt
+    ).toUTCString()
 
     // Escape XML special characters
     const escapeXml = (str: string) =>
@@ -76,13 +77,13 @@ ${postsWithCategories
         .replace(/'/g, "&#39;")
 
     return `    <item>
-      <title>${escapeXml(post.title)}</title>
-      <description>${escapeXml(post.summary)}</description>
-      <link>${postUrl}</link>
-      <guid isPermaLink="true">${postUrl}</guid>
+      <title>${escapeXml(article.title)}</title>
+      <description>${escapeXml(article.summary)}</description>
+      <link>${articleUrl}</link>
+      <guid isPermaLink="true">${articleUrl}</guid>
       <pubDate>${pubDate}</pubDate>
-      <category>${escapeXml(post.categoryName)}</category>
-      <content:encoded><![CDATA[${parseMarkdown(post.content).replace(
+      <category>${escapeXml(article.categoryName)}</category>
+      <content:encoded><![CDATA[${parseMarkdown(article.content).replace(
         /\n/g,
         "\n  "
       )}]]></content:encoded>

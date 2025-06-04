@@ -1,18 +1,17 @@
 import { Router } from "../../server/app"
 import { drizzle } from "drizzle-orm/d1"
-import { category, post } from "@/schemas/drizzle"
+import { category, article } from "@/schemas/drizzle"
 import { eq, and } from "drizzle-orm"
 import Article from "../pages/article"
 import authenticateApiKey from "@/utils/authenticate"
 
 const router = Router()
 
-router.get("/:categorySlug/:postSlug", async (c) => {
+router.get("/:categorySlug/:articleSlug", async (c) => {
   const db = drizzle(c.env.DB)
   const categorySlug = c.req.param("categorySlug")
-  const postSlug = c.req.param("postSlug")
+  const articleSlug = c.req.param("articleSlug")
 
-  // First, find the category by slug
   const categories = await db
     .select()
     .from(category)
@@ -22,13 +21,18 @@ router.get("/:categorySlug/:postSlug", async (c) => {
     return c.notFound()
   }
 
-  // Then find the post by slug and ensure it belongs to the category
-  const posts = await db
+  // Then find the article by slug and ensure it belongs to the category
+  const articles = await db
     .select()
-    .from(post)
-    .where(and(eq(post.slug, postSlug), eq(post.categoryId, categories[0].id)))
+    .from(article)
+    .where(
+      and(
+        eq(article.slug, articleSlug),
+        eq(article.categoryId, categories[0].id)
+      )
+    )
 
-  if (!posts[0]) {
+  if (!articles[0]) {
     return c.notFound()
   }
 
@@ -37,14 +41,14 @@ router.get("/:categorySlug/:postSlug", async (c) => {
 
   return c.html(
     Article({
-      post: posts[0],
+      article: articles[0],
       categories: allCategories,
       category: categories[0],
     })
   )
 })
 
-router.post("/post", authenticateApiKey, async (c) => {
+router.post("/article", authenticateApiKey, async (c) => {
   try {
     c.res.headers.set("X-Content-Type-Options", "nosniff")
     c.res.headers.set("X-Frame-Options", "DENY")
@@ -60,11 +64,11 @@ router.post("/post", authenticateApiKey, async (c) => {
       .trim()
       .toLowerCase()
 
-    const existingPosts = await db
+    const existingArticles = await db
       .select()
-      .from(post)
-      .where(eq(post.slug, slug))
-    if (existingPosts.length > 0) {
+      .from(article)
+      .where(eq(article.slug, slug))
+    if (existingArticles.length > 0) {
       return c.json({ error: "Slug must be unique" }, 400)
     }
 
@@ -77,7 +81,7 @@ router.post("/post", authenticateApiKey, async (c) => {
       return c.json({ error: "Invalid category ID" }, 400)
     }
 
-    const newPost = {
+    const newArticle = {
       id: crypto.randomUUID(),
       title: String(formData.get("title") || "").trim(),
       content: content,
@@ -92,17 +96,17 @@ router.post("/post", authenticateApiKey, async (c) => {
       categoryId: categoryId,
     }
 
-    const result = await db.insert(post).values(newPost).returning()
+    const result = await db.insert(article).values(newArticle).returning()
 
     if (result.length === 0) {
-      return c.json({ error: "Failed to create post" }, 500)
+      return c.json({ error: "Failed to create article" }, 500)
     }
 
     await c.env.KV.delete("home") // Invalidate cache for home page
 
     return c.json({
-      message: "Post created successfully",
-      post: {
+      message: "Article created successfully",
+      article: {
         id: result[0].id,
         title: result[0].title,
         slug: result[0].slug,
@@ -111,7 +115,7 @@ router.post("/post", authenticateApiKey, async (c) => {
       },
     })
   } catch (error) {
-    console.error("Error creating post:", error)
+    console.error("Error creating article:", error)
     return c.json({ error: "Internal server error" }, 500)
   }
 })

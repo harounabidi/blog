@@ -1,6 +1,6 @@
 import { Router } from "../../server/app"
 import { drizzle } from "drizzle-orm/d1"
-import { category, post } from "@/schemas/drizzle"
+import { category, article } from "@/schemas/drizzle"
 import { eq } from "drizzle-orm"
 import Category from "../pages/category"
 import authenticateApiKey from "@/utils/authenticate"
@@ -66,32 +66,32 @@ router.get("/:slug", async (c) => {
     return c.notFound()
   }
 
-  // Get all published posts in this category
-  const posts = await db
+  // Get all published articles in this category
+  const articles = await db
     .select({
-      id: post.id,
-      title: post.title,
-      slug: post.slug,
-      content: post.content,
-      summary: post.summary,
-      cover: post.cover,
-      readingTime: post.readingTime,
-      status: post.status,
-      publishedAt: post.publishedAt,
-      createdAt: post.createdAt,
-      updatedAt: post.updatedAt,
-      categoryId: post.categoryId,
+      id: article.id,
+      title: article.title,
+      slug: article.slug,
+      content: article.content,
+      summary: article.summary,
+      cover: article.cover,
+      readingTime: article.readingTime,
+      status: article.status,
+      publishedAt: article.publishedAt,
+      createdAt: article.createdAt,
+      updatedAt: article.updatedAt,
+      categoryId: article.categoryId,
       categorySlug: category.slug,
     })
-    .from(post)
-    .innerJoin(category, eq(post.categoryId, category.id))
+    .from(article)
+    .innerJoin(category, eq(article.categoryId, category.id))
     .where(eq(category.slug, slug))
-    .orderBy(post.publishedAt)
+    .orderBy(article.publishedAt)
 
   return c.html(
     Category({
       category: categories[0],
-      posts: posts,
+      articles,
       categories: allCategories,
     })
   )
