@@ -6,6 +6,7 @@ export interface Env {
   NODE_ENV: string
   ENCRYPTION_KEY: string
   DB: D1Database
+  CLOUDINARY_URL: string
   ASSETS: {
     fetch: (request: Request) => Promise<Response>
   }

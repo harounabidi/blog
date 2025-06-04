@@ -122,7 +122,7 @@ export default function helloNewSubscriber({
                         {post.cover && (
                           <div style='position: relative; width: 96px; height: 96px; overflow: hidden; flex-shrink: 0; display: flex;'>
                             <img
-                              src={post.cover}
+                              src={`${url}${post.cover}`}
                               alt={post.title}
                               style='width: 100%; height: 100%; object-fit: cover; border-radius: 4px;'
                               loading='eager'

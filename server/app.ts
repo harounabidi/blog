@@ -147,6 +147,29 @@ export default function App() {
     })
   })
 
+  app.get("/cdn/*", async (c) => {
+    const path = c.req.path.replace("/cdn/", "")
+    const targetUrl = `${c.env.CLOUDINARY_URL}/${path}`
+
+    const response = await fetch(targetUrl)
+
+    if (!response.ok) {
+      return c.redirect(
+        "https://placehold.co/600x400?text=Image+Not+Found&font=source-sans-pro",
+        302
+      )
+    }
+
+    return new Response(response.body, {
+      status: response.status,
+      headers: {
+        "Content-Type":
+          response.headers.get("Content-Type") || "application/octet-stream",
+        "Cache-Control": "public, max-age=31536000, immutable",
+      },
+    })
+  })
+
   app.notFound((c) => {
     return c.html(NotFound(), 404)
   })
