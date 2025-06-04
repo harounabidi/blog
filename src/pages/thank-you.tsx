@@ -1,11 +1,7 @@
 import { Category } from "@/types/category"
 import Layout from "./layout"
 
-export default function ThankYouPage({
-  categories,
-}: {
-  categories: Category[]
-}) {
+export default function ThankYou({ categories }: { categories: Category[] }) {
   return (
     <Layout
       categories={categories}

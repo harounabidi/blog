@@ -1,6 +1,6 @@
 import { encryptWithPassword } from "@/utils/hash"
 
-export default async function EmailNotFound({
+export default async function EmailError({
   email,
   key,
 }: {

@@ -5,9 +5,10 @@ import { eq } from "drizzle-orm"
 import { mail } from "@/utils/mail"
 import { encryptWithPassword, decryptWithPassword } from "@/utils/hash"
 import helloNewSubscriber from "@/templates/hello"
-import UnsubscribePage from "../pages/unsubscribe-page"
-import EmailNotFound from "../pages/email-not-found"
-import ResubscribePage from "../pages/resubscribe-page"
+import UnsubscribePage from "../pages/unsubscribe"
+import EmailError from "../pages/email-error"
+import Resubscribe from "../pages/resubscribe"
+import Unsubscribed from "../pages/unsubscribed"
 
 const router = Router()
 
@@ -152,7 +153,7 @@ router.post("/unsubscribe/:email", async (c) => {
 
   if (existingSubscriber.length === 0) {
     return c.html(
-      EmailNotFound({
+      EmailError({
         email,
         key: c.env.ENCRYPTION_KEY,
       })
@@ -161,7 +162,12 @@ router.post("/unsubscribe/:email", async (c) => {
 
   await db.delete(subscriber).where(eq(subscriber.email, email))
 
-  return c.json({ message: "Unsubscribed successfully" })
+  return c.html(
+    Unsubscribed({
+      email,
+      key: c.env.ENCRYPTION_KEY,
+    })
+  )
 })
 
 router.post("/resubscribe/:email", async (c) => {
@@ -202,7 +208,7 @@ router.post("/resubscribe/:email", async (c) => {
     return c.json({ error: "Failed to resubscribe" }, 500)
   }
 
-  return c.html(ResubscribePage())
+  return c.html(Resubscribe())
 })
 
 export default router

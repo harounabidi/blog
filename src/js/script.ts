@@ -200,16 +200,10 @@ class SubscribeToNewsletter {
     this.loader?.classList.remove("invisible")
     this.button?.classList.add("invisible")
 
-    const response = await fetch("/subscribe", {
+    await fetch("/subscribe", {
       method: "POST",
       body: formData,
-    })
-
-    if (!response.ok) {
-      window.location.href = "/"
-    } else {
-      window.location.href = "/thank-you"
-    }
+    }).then(() => (window.location.href = "/thank-you"))
 
     this.button?.classList.remove("invisible")
     this.loader?.classList.add("invisible")

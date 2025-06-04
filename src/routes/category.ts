@@ -2,7 +2,7 @@ import { Router } from "../../server/app"
 import { drizzle } from "drizzle-orm/d1"
 import { category, post } from "@/schemas/drizzle"
 import { eq } from "drizzle-orm"
-import CategoryPage from "../pages/category"
+import Category from "../pages/category"
 import authenticateApiKey from "@/utils/authenticate"
 
 const router = Router()
@@ -89,7 +89,7 @@ router.get("/:slug", async (c) => {
     .orderBy(post.publishedAt)
 
   return c.html(
-    CategoryPage({
+    Category({
       category: categories[0],
       posts: posts,
       categories: allCategories,

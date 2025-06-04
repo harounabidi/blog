@@ -1,6 +1,6 @@
 import Footer from "@/components/layout/footer"
 import Header from "@/components/layout/header"
-import googleAnalytics from "@/utils/google-an"
+// import googleAnalytics from "@/utils/google-an"
 import { html } from "hono/html"
 import { FC } from "hono/jsx"
 
@@ -170,7 +170,13 @@ const Layout: FC = (props) => {
             crossorigin='use-credentials'
           />
 
-          {googleAnalytics()}
+          {/* {googleAnalytics()} */}
+          <meta
+            name='google-site-verification'
+            content='iN1xdeEkFGJeD8N4lTv0IO_QTqe2nAuikOZyEckBpho'
+          />
+
+          <meta name='yandex-verification' content='cad7294f23991efc' />
         </head>
         <body>
           <Header categories={props.categories} />

@@ -1,4 +1,4 @@
-export default async function ResubscribePage() {
+export default async function Resubscribe() {
   return (
     <html lang='en'>
       <head>
@@ -9,7 +9,7 @@ export default async function ResubscribePage() {
         <link rel='stylesheet' href='/css/index.css' />
       </head>
       <body>
-        <main class='max-w-[45rem] space-y-4 my-8 mx-auto px-4'>
+        <main class='max-w-[45rem] w-full space-y-4 my-8 mx-auto px-4'>
           <h1 class='text-lg font-semibold'>Haroun Abidi</h1>
           <p>Welcome Back!</p>
           <a

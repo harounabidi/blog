@@ -1,7 +1,7 @@
 import { category } from "@/schemas/drizzle"
 import { Router } from "@/server/app"
 import { drizzle } from "drizzle-orm/d1"
-import ContactPage from "../pages/contact"
+import Contact from "../pages/contact"
 
 const router = Router()
 
@@ -10,7 +10,7 @@ router.get("/contact", async (c) => {
   const categories = await db.select().from(category).orderBy(category.name)
 
   return c.html(
-    ContactPage({
+    Contact({
       categories,
     })
   )

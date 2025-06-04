@@ -2,7 +2,7 @@ import { Router } from "../../server/app"
 import { drizzle } from "drizzle-orm/d1"
 import { category, post } from "@/schemas/drizzle"
 import { eq, and } from "drizzle-orm"
-import PostPage from "../pages/post"
+import Article from "../pages/article"
 import authenticateApiKey from "@/utils/authenticate"
 
 const router = Router()
@@ -36,7 +36,7 @@ router.get("/:categorySlug/:postSlug", async (c) => {
   const allCategories = await db.select().from(category).orderBy(category.name)
 
   return c.html(
-    PostPage({
+    Article({
       post: posts[0],
       categories: allCategories,
       category: categories[0],

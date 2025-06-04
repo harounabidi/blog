@@ -1,13 +1,12 @@
 import App from "../server/app"
-import post from "./routes/post"
+import post from "./routes/article"
 import category from "./routes/category"
 import subscribe from "./routes/subscribe"
-import aboutBlog from "./routes/about-blog"
-import aboutMe from "./routes/about-me"
+import about from "./routes/about"
+import bio from "./routes/bio"
 import contact from "./routes/contact"
 import thankYou from "./routes/thank-you"
 import rss from "./routes/rss"
-
 import index from "./routes"
 import { serveStatic } from "hono/cloudflare-pages"
 
@@ -15,8 +14,8 @@ const app = App()
 
 const routes = [
   index,
-  aboutMe,
-  aboutBlog,
+  bio,
+  about,
   contact,
   thankYou,
   subscribe,

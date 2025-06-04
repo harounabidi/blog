@@ -24,10 +24,10 @@ export default function Footer({ categories }: { categories: Category[] }) {
           </div>
           <div class='flex gap-2 flex-col w-full items-end justify-start'>
             <p class='mb-4 font-bold capitalize'>General</p>
-            <a href='/about-blog' class='text-sm hover:underline'>
+            <a href='/about' class='text-sm hover:underline'>
               About this blog
             </a>
-            <a href='/about-me' class='text-sm hover:underline'>
+            <a href='/bio' class='text-sm hover:underline'>
               About Haroun
             </a>
             <a href='/contact' class='text-sm hover:underline'>

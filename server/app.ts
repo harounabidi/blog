@@ -1,7 +1,7 @@
 import { Hono } from "hono"
 import { Env } from "../types/env"
 // import { csrf } from "hono/csrf"
-import NotFound from "../src/pages/not-found"
+import NotFound from "../src/pages/404"
 import { logger } from "hono/logger"
 import OG from "@/components/og"
 import { drizzle } from "drizzle-orm/d1"
@@ -105,13 +105,13 @@ export default function App() {
         <priority>1.0</priority>
       </url>
       <url>
-        <loc>https://blog.harounabidi.com/about-me</loc>
+        <loc>https://blog.harounabidi.com/bio</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
       </url>
       <url>
-        <loc>https://blog.harounabidi.com/about-blog</loc>
+        <loc>https://blog.harounabidi.com/about</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>

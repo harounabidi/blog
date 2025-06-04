@@ -1,5 +1,5 @@
 import { Router } from "@/server/app"
-import ThankYouPage from "../pages/thank-you-page"
+import ThankYou from "../pages/thank-you"
 import { drizzle } from "drizzle-orm/d1"
 import { category } from "@/schemas/drizzle"
 
@@ -10,7 +10,7 @@ router.get("/thank-you", async (c) => {
   const categories = await db.select().from(category).orderBy(category.name)
 
   return c.html(
-    ThankYouPage({
+    ThankYou({
       categories,
     })
   )

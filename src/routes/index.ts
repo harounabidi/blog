@@ -2,7 +2,7 @@ import { Router } from "../../server/app"
 import { drizzle } from "drizzle-orm/d1"
 import { category, post } from "@/schemas/drizzle"
 import { eq } from "drizzle-orm"
-import HomePage from "../pages/home"
+import HomePage from "../pages"
 
 const router = Router()
 
@@ -41,7 +41,9 @@ router.get("/", async (c) => {
   // If not cached, return the generated page
   const pageContent = await HomePage({ posts, categories })
   const htmlContent = pageContent.toString()
-  await c.env.KV.put("home", htmlContent)
+  await c.env.KV.put("home", htmlContent, {
+    expirationTtl: 60 * 60 * 24, // Cache for 1 day
+  })
 
   return c.html(htmlContent)
 })

@@ -3,7 +3,7 @@ import type { Post } from "../../types/post"
 import Layout from "./layout"
 import PostList from "@/components/post-list"
 
-export default function CategoryPage({
+export default function Category({
   category,
   categories,
   posts,

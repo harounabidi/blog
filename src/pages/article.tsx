@@ -4,7 +4,7 @@ import { parseMarkdown } from "@/utils/parse-md"
 import PostCover from "@/components/post-cover"
 import { Category } from "@/types/category"
 
-export default function PostPage({
+export default function Article({
   post,
   categories,
   category,

@@ -1,6 +1,6 @@
 import { encryptWithPassword } from "@/utils/hash"
 
-export default async function UnsubscribePage({
+export default async function Unsubscribe({
   email,
   key,
 }: {
@@ -23,7 +23,7 @@ export default async function UnsubscribePage({
         <link rel='stylesheet' href='/css/index.css' />
       </head>
       <body>
-        <main class='max-w-[45rem] space-y-4 my-8 mx-auto px-4'>
+        <main class='max-w-[45rem] w-full space-y-4 my-8 mx-auto px-4'>
           <h1 class='text-lg font-semibold'>Haroun Abidi</h1>
           <p>Are you sure you want to unsubscribe {emailDisplay}?</p>
           <form action={`/unsubscribe/${encryptedEmail}`} method='post'>
