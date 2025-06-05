@@ -5,7 +5,6 @@ export async function mail({
   email,
   subject,
   body,
-  name,
 }: {
   url: string
   token: string
@@ -13,7 +12,6 @@ export async function mail({
   email: string
   subject: string
   body: string
-  name: string
 }): Promise<{ success: boolean; error?: string }> {
   try {
     // Validate required parameters
@@ -42,8 +40,8 @@ export async function mail({
         Authorization: token,
       },
       body: JSON.stringify({
-        from: { address: from },
-        to: [{ email_address: { address: email, name: name } }],
+        from: { address: from, name: "Haroun Abidi" },
+        to: [{ email_address: { address: email } }],
         subject: subject,
         htmlbody: body,
       }),

@@ -95,7 +95,6 @@ router.post("/subscribe", async (c) => {
     email,
     subject: "Welcome to the Blog — Let’s Stay in Touch! 👋",
     body: htmlString,
-    name: email,
   })
 
   if (!response.success) {
