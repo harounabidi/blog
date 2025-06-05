@@ -3,7 +3,6 @@ import { drizzle } from "drizzle-orm/d1"
 import { category, article } from "@/schemas/drizzle"
 import { eq } from "drizzle-orm"
 import HomePage from "../pages"
-import helloNewSubscriber from "@/templates/hello"
 
 const router = Router()
 
@@ -34,25 +33,19 @@ router.get("/", async (c) => {
   const categories = await db.select().from(category).orderBy(category.name)
 
   // return the markup from kv
-  // const cachedHomePage = await c.env.KV.get("home")
-  // if (cachedHomePage) {
-  //   return c.html(cachedHomePage)
-  // }
+  const cachedHomePage = await c.env.KV.get("home")
+  if (cachedHomePage) {
+    return c.html(cachedHomePage)
+  }
 
-  // // If not cached, return the generated page
-  // const pageContent = await HomePage({ articles, categories })
-  // const htmlContent = pageContent.toString()
-  // await c.env.KV.put("home", htmlContent, {
-  //   expirationTtl: 60 * 60 * 24, // Cache for 1 day
-  // })
+  // If not cached, return the generated page
+  const pageContent = await HomePage({ articles, categories })
+  const htmlContent = pageContent.toString()
+  await c.env.KV.put("home", htmlContent, {
+    expirationTtl: 60 * 60 * 24, // Cache for 1 day
+  })
 
-  return c.html(
-    helloNewSubscriber({
-      articles,
-      url: "https://blog.harounabidi.com",
-      email: "harooonabidi@gmail.com",
-    })
-  )
+  return c.html(htmlContent)
 })
 
 export default router
