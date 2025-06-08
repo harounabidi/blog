@@ -13,13 +13,7 @@ export default function ThankYou({ categories }: { categories: Category[] }) {
           Thank you for subscribing to my newsletter! Your support means a lot
           to me.
         </p>
-        <p>
-          News will be sent to your inbox soon. Please check your email to
-          confirm your subscription and start receiving updates. If you don't
-          see the confirmation email, please check your spam folder.
-        </p>
-        {/* Success! I just sent you a welcome email, which includes the “Josh
-        Starter Pack”, a collection of my most popular content. 😄 */}
+        <p>I just sent you a welcome email with my latest article. Enjoy!</p>
       </section>
     </Layout>
   )

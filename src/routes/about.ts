@@ -1,19 +1,10 @@
-import { category } from "@/schemas/drizzle"
 import { Router } from "@/server/app"
-import { drizzle } from "drizzle-orm/d1"
-import AboutBlogPage from "../pages/about"
+import About from "../pages/about"
 
 const router = Router()
 
 router.get("/about", async (c) => {
-  const db = drizzle(c.env.DB)
-  const categories = await db.select().from(category).orderBy(category.name)
-
-  return c.html(
-    AboutBlogPage({
-      categories,
-    })
-  )
+  return c.html(About(c))
 })
 
 export default router

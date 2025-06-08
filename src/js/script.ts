@@ -200,68 +200,71 @@ class SubscribeToNewsletter {
     this.loader?.classList.remove("invisible")
     this.button?.classList.add("invisible")
 
-    const response = await fetch("/subscribe", {
-      method: "POST",
-      body: formData,
-    })
+    try {
+      const response = await fetch("/subscribe", {
+        method: "POST",
+        body: formData,
+      })
 
-    if (!response.ok) {
-      window.location.href = "/"
-    } else {
-      window.location.href = "/thank-you"
+      // Log any errors for debugging, but always redirect to thank you page
+      if (!response.ok) {
+        const errorData = await response.json()
+        console.error("Subscription error:", errorData)
+      }
+    } catch (error) {
+      console.error("Network error:", error)
     }
 
-    this.button?.classList.remove("invisible")
-    this.loader?.classList.add("invisible")
-    this.loader?.classList.remove("visible")
+    // Always redirect to thank you page regardless of response
+    window.location.href = "/thank-you"
   }
 }
 
-class HeaderNavigationManager {
-  private homeLink: HTMLElement | null = null
-  private categories: HTMLElement | null = null
+// class HeaderNavigationManager {
+//   private homeLink: HTMLElement | null = null
+//   private categories: HTMLElement | null = null
 
-  constructor() {
-    this.homeLink = document.getElementById("home-link")
-    this.categories = document.getElementById("categories")
-  }
+//   constructor() {
+//     this.homeLink = document.getElementById("home-link")
+//     this.categories = document.getElementById("categories")
+//   }
 
-  private isHomePage(): boolean {
-    const pathname = window.location.pathname
-    // Home page or category pages (e.g., /javascript, /css, etc.)
-    return (
-      pathname === "/" ||
-      (pathname.split("/").length === 2 &&
-        pathname !== "/" &&
-        !pathname.includes("."))
-    )
-  }
+//   private isHomePage(): boolean {
+//     const pathname = window.location.pathname
+//     // Home page or category pages (e.g., /javascript, /css, etc.)
+//     return (
+//       pathname === "/" ||
+//       (pathname.split("/").length === 2 &&
+//         pathname !== "/" &&
+//         !pathname.includes("."))
+//     )
+//   }
 
-  private updateHeaderVisibility(): void {
-    if (!this.homeLink || !this.categories) return
+//   private updateHeaderVisibility(): void {
+//     if (!this.homeLink || !this.categories) return
 
-    const isHome = this.isHomePage()
+//     const isHome = this.isHomePage()
 
-    if (isHome) {
-      // On home page or category pages: hide home-link, show categories
-      this.homeLink.classList.add("hidden")
-      this.categories.classList.remove("hidden")
-    } else {
-      // On article pages: show home-link, hide categories
-      this.homeLink.classList.remove("hidden")
-      this.categories.classList.add("hidden")
-    }
-  }
+//     if (isHome) {
+//       // On home page or category pages: hide home-link, show categories
+//       this.homeLink.classList.add("hidden")
+//       this.categories.classList.remove("hidden")
+//     } else {
+//       // On article pages: show home-link, hide categories
+//       this.homeLink.classList.remove("hidden")
+//       this.categories.classList.add("hidden")
+//     }
+//   }
 
-  public init(): void {
-    this.updateHeaderVisibility()
+//   public init(): void {
+//     this.updateHeaderVisibility()
 
-    // Listen for navigation changes (if using SPA navigation)
-    window.addEventListener("popstate", () => {
-      this.updateHeaderVisibility()
-    })
-  }
-}
+//     // Listen for navigation changes (if using SPA navigation)
+//     window.addEventListener("popstate", () => {
+//       this.updateHeaderVisibility()
+//     })
+//   }
+// }
 
 class CategoriesScrollManager {
   private categoriesContainer: HTMLElement | null = null
@@ -425,14 +428,14 @@ window.addEventListener("DOMContentLoaded", () => {
   const themeManager = new ThemeManager()
   const scrollHeaderManager = new ScrollHeaderManager()
   const subscribeToNewsletter = new SubscribeToNewsletter()
-  const headerNavigationManager = new HeaderNavigationManager()
+  // const headerNavigationManager = new HeaderNavigationManager()
+  // const categoryActiveManager = new CategoryActiveManager()
   const categoriesScrollManager = new CategoriesScrollManager()
-  const categoryActiveManager = new CategoryActiveManager()
 
   themeManager.init()
   scrollHeaderManager.init()
   subscribeToNewsletter.init()
-  headerNavigationManager.init()
+  // headerNavigationManager.init()
   categoriesScrollManager.init()
-  categoryActiveManager.init()
+  // categoryActiveManager.init()
 })

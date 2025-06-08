@@ -2,24 +2,28 @@ import { Article } from "@/types/article"
 import Layout from "./layout"
 import { parseMarkdown } from "@/utils/parse-md"
 import ArticleCover from "@/components/article-cover"
+import { Context } from "hono"
+import { Env } from "@/types/env"
 import { Category } from "@/types/category"
 
 export default function Article({
+  c,
   article,
-  categories,
   category,
 }: {
+  c: Context<{
+    Bindings: Env
+  }>
   article: Article
-  categories: Category[]
   category: Category
 }) {
   const content = parseMarkdown(article.content)
 
   return (
     <Layout
+      c={c}
       title={article.title}
       description={article.summary}
-      categories={categories}
       canonical={`https://blog.harounabidi.com/${category.slug}/${article.slug}`}
       publishedAt={article.createdAt}
       updatedAt={article.updatedAt}

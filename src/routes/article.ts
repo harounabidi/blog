@@ -36,13 +36,10 @@ router.get("/:categorySlug/:articleSlug", async (c) => {
     return c.notFound()
   }
 
-  // Get all categories for navigation
-  const allCategories = await db.select().from(category).orderBy(category.name)
-
   return c.html(
     Article({
+      c,
       article: articles[0],
-      categories: allCategories,
       category: categories[0],
     })
   )

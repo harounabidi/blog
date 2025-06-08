@@ -90,9 +90,9 @@ router.get("/:slug", async (c) => {
 
   return c.html(
     Category({
-      category: categories[0],
+      c,
       articles,
-      categories: allCategories,
+      category: categories[0],
     })
   )
 })

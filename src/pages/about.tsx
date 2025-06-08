@@ -1,9 +1,14 @@
-import { Category } from "@/types/category"
 import Layout from "./layout"
+import { Context } from "hono"
+import { Env } from "@/types/env"
 
-export default function About({ categories }: { categories: Category[] }) {
+export default function About(
+  c: Context<{
+    Bindings: Env
+  }>
+) {
   return (
-    <Layout categories={categories}>
+    <Layout c={c}>
       <section class='max-w-[45rem] space-y-4 my-2 mx-auto px-4'>
         <h1 class='text-2xl font-bold'>About the Blog</h1>
         <p>

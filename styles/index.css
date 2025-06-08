@@ -174,11 +174,9 @@ footer input[type="email"] {
   left: 50%;
   transform: translateX(-50%);
   font-size: 1em;
-  /* color: var(--color-foreground); */
 }
 
 .category-inactive {
-  /* color: var(--color-foreground-muted); */
   opacity: 0.7;
   transition: all 0.2s ease;
   position: relative;

@@ -30,20 +30,21 @@ router.get("/", async (c) => {
     .innerJoin(category, eq(article.categoryId, category.id))
     .orderBy(article.createdAt)
 
-  const categories = await db.select().from(category).orderBy(category.name)
-
   // return the markup from kv
-  const cachedHomePage = await c.env.KV.get("home")
-  if (cachedHomePage) {
-    return c.html(cachedHomePage)
-  }
+  // const cachedHomePage = await c.env.KV.get("home")
+  // if (cachedHomePage) {
+  //   return c.html(cachedHomePage)
+  // }
 
   // If not cached, return the generated page
-  const pageContent = await HomePage({ articles, categories })
-  const htmlContent = pageContent.toString()
-  await c.env.KV.put("home", htmlContent, {
-    expirationTtl: 60 * 60 * 24, // Cache for 1 day
+  const pageContent = await HomePage({
+    c,
+    articles,
   })
+  const htmlContent = pageContent.toString()
+  // await c.env.KV.put("home", htmlContent, {
+  //   expirationTtl: 60 * 60 * 24, // Cache for 1 day
+  // })
 
   return c.html(htmlContent)
 })
