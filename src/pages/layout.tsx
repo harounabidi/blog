@@ -2,6 +2,7 @@ import Footer from "@/components/layout/footer"
 import Header from "@/components/layout/header"
 import { category } from "@/schemas/drizzle"
 import { drizzle } from "drizzle-orm/d1"
+import { css, Style } from "hono/css"
 import { html } from "hono/html"
 import { FC } from "hono/jsx"
 
@@ -183,6 +184,52 @@ function Head({
       />
 
       <meta name='yandex-verification' content='cad7294f23991efc' />
+
+      <Style>
+        {css`
+          .browser-warning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+              sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          }
+          .browser-warning a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 600;
+          }
+          .browser-warning .close-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 0;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          body.has-browser-warning {
+            padding-top: 60px;
+          }
+        `}
+      </Style>
     </head>
   )
 }
@@ -196,9 +243,43 @@ const Layout: FC = async (props) => {
       <html lang='en' class='dark'>
         <Head props={props} />
         <body>
-          <Header categories={categories} c={props.c} />
-          <main class='w-full h-full min-h-[60vh] mb-16'>{props.children}</main>
-          <Footer categories={categories} />
+          <noscript>
+            <div class='browser-warning'>
+              <strong>JavaScript Required:</strong> This website requires
+              JavaScript to function properly. Please enable JavaScript in your
+              browser settings or
+              <a
+                href='https://www.enable-javascript.com/'
+                target='_blank'
+                rel='noopener'>
+                learn how to enable JavaScript
+              </a>
+              .
+            </div>
+          </noscript>
+
+          <div
+            id='browser-warning'
+            class='browser-warning'
+            style='display: none;'>
+            <span id='warning-message'></span>
+            <button
+              class='close-btn'
+              onclick='closeBrowserWarning()'
+              aria-label='Close warning'>
+              ×
+            </button>
+          </div>
+
+          <script src='/browser-warning.js'></script>
+
+          <div id='main-content'>
+            <Header categories={categories} c={props.c} />
+            <main class='w-full h-full min-h-[60vh] mb-16'>
+              {props.children}
+            </main>
+            <Footer categories={categories} />
+          </div>
         </body>
       </html>
     </>
