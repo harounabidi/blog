@@ -125,8 +125,8 @@ function Head({
 
       <link href='/css/index.css' rel='stylesheet'></link>
 
-      <link href='/css/vs-light.css' rel='preload' as='style'></link>
-      <link href='/css/vs-dark.css' rel='preload' as='style'></link>
+      <link href='/css/vs-light.css' rel='stylesheet'></link>
+      <link href='/css/vs-dark.css' rel='stylesheet'></link>
 
       <script src='/script.js' type='module'></script>
 

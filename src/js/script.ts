@@ -425,14 +425,14 @@ class CategoryActiveManager {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  const themeManager = new ThemeManager()
+  // const themeManager = new ThemeManager()
   const scrollHeaderManager = new ScrollHeaderManager()
   const subscribeToNewsletter = new SubscribeToNewsletter()
   // const headerNavigationManager = new HeaderNavigationManager()
   // const categoryActiveManager = new CategoryActiveManager()
   const categoriesScrollManager = new CategoriesScrollManager()
 
-  themeManager.init()
+  // themeManager.init()
   scrollHeaderManager.init()
   subscribeToNewsletter.init()
   // headerNavigationManager.init()
