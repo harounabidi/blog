@@ -1,10 +1,20 @@
 import { html } from "hono/html"
+import { Context } from "hono"
+import { Env } from "@/types/env"
+import {
+  getThemeFromRequest,
+  getThemeClass,
+  getThemeScript,
+} from "@/utils/theme"
 
-export default function NotFound() {
+export default function NotFound(c?: Context<{ Bindings: Env }>) {
+  // Default to light theme if no context provided (fallback)
+  const theme = c ? getThemeFromRequest(c) : "light"
+
   return (
     <>
       {html`<!DOCTYPE html>`}
-      <html lang='en' class='dark'>
+      <html lang='en' class={getThemeClass(theme)}>
         <head>
           <meta charSet='utf-8' />
           <meta name='viewport' content='width=device-width, initial-scale=1' />
@@ -16,6 +26,7 @@ export default function NotFound() {
             sizes='16x16'
           />
           <link href='/css/index.css' rel='stylesheet'></link>
+          {html`${getThemeScript()}`}
         </head>
         <body class='bg-background text-foreground'>
           <main class='max-w-[45rem] h-svh grid place-items-center my-4 mx-auto px-4'>

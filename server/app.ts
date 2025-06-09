@@ -2,11 +2,16 @@ import { Hono } from "hono"
 import { Env } from "../types/env"
 // import { csrf } from "hono/csrf"
 import NotFound from "../src/pages/404"
+import UnsupportedBrowserPage from "../src/pages/unsupported-browser"
 import { logger } from "hono/logger"
 import OG from "@/components/og"
 import { drizzle } from "drizzle-orm/d1"
 import { category, article } from "@/schemas/drizzle"
 import { eq } from "drizzle-orm"
+import {
+  checkBrowserSupport,
+  shouldBlockBrowser,
+} from "@/utils/browser-detection"
 
 export function Router() {
   return new Hono<{ Bindings: Env }>({
@@ -40,6 +45,45 @@ export default function App() {
   // app.use("/article/*", csrf())
 
   app.use("*", logger())
+
+  // Browser detection middleware
+  app.use("*", async (c, next) => {
+    const userAgent = c.req.header("user-agent") || ""
+    const browserSupport = checkBrowserSupport(userAgent)
+
+    // Check if user wants to force access
+    const forceAccess = c.req.query("force") === "1"
+
+    // Skip browser check for static assets and API endpoints
+    const path = c.req.path
+    if (
+      path.startsWith("/favicon/") ||
+      path.startsWith("/css/") ||
+      path.startsWith("/script.js") ||
+      path.startsWith("/api/") ||
+      path.startsWith("/cdn/") ||
+      path.endsWith(".xml") ||
+      path.endsWith(".txt") ||
+      path.endsWith(".webmanifest") ||
+      path.endsWith(".svg") ||
+      forceAccess
+    ) {
+      return next()
+    }
+
+    // Block unsupported browsers
+    if (shouldBlockBrowser(browserSupport)) {
+      return c.html(
+        UnsupportedBrowserPage({
+          message: browserSupport.message!,
+          browserInfo: browserSupport.browserInfo,
+        }),
+        200
+      )
+    }
+
+    return next()
+  })
 
   app.get("/robots.txt", (c) => {
     return c.text("User-agent: *\nDisallow: /api/", 200, {
@@ -171,7 +215,22 @@ export default function App() {
   })
 
   app.notFound((c) => {
-    return c.html(NotFound(), 404)
+    return c.html(NotFound(c), 404)
+  })
+
+  app.get("/unsupported-browser", (c) => {
+    // Default message and browser info for direct access
+    const message =
+      'Your browser is not supported. Please upgrade to a modern browser such as <a href="https://www.google.com/chrome/" target="_blank" rel="noopener">Chrome 111+</a>, <a href="https://www.microsoft.com/edge/" target="_blank" rel="noopener">Edge 111+</a>, <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener">Firefox 128+</a>, or <a href="https://www.apple.com/safari/" target="_blank" rel="noopener">Safari 16.4+</a>.'
+    const browserInfo = { browser: "unknown", version: 0, minor: 0 }
+
+    return c.html(
+      UnsupportedBrowserPage({
+        message,
+        browserInfo,
+      }),
+      200
+    )
   })
 
   return app

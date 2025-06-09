@@ -2,12 +2,18 @@ import Footer from "@/components/layout/footer"
 import Header from "@/components/layout/header"
 import { category } from "@/schemas/drizzle"
 import { drizzle } from "drizzle-orm/d1"
-import { css, Style } from "hono/css"
 import { html } from "hono/html"
 import { FC } from "hono/jsx"
+import {
+  getThemeFromRequest,
+  getThemeClass,
+  getThemeStyleLinks,
+  getThemeScript,
+} from "@/utils/theme"
 
 function Head({
   props,
+  theme,
 }: {
   props: {
     title?: string
@@ -19,6 +25,7 @@ function Head({
     updatedAt?: string
     categories?: string[]
   }
+  theme: "dark" | "light"
 }) {
   return (
     <head>
@@ -126,8 +133,9 @@ function Head({
 
       <link href='/css/index.css' rel='stylesheet'></link>
 
-      <link href='/css/vs-light.css' rel='stylesheet'></link>
-      <link href='/css/vs-dark.css' rel='stylesheet'></link>
+      {html`${getThemeStyleLinks(theme)}`}
+
+      {html`${getThemeScript()}`}
 
       <script src='/script.js' type='module'></script>
 
@@ -177,59 +185,12 @@ function Head({
         crossorigin='use-credentials'
       />
 
-      {/* {googleAnalytics()} */}
       <meta
         name='google-site-verification'
         content='iN1xdeEkFGJeD8N4lTv0IO_QTqe2nAuikOZyEckBpho'
       />
 
       <meta name='yandex-verification' content='cad7294f23991efc' />
-
-      <Style>
-        {css`
-          .browser-warning {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 9999;
-            background: #ff6b6b;
-            color: white;
-            padding: 12px 20px;
-            text-align: center;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-              sans-serif;
-            font-size: 14px;
-            line-height: 1.4;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-          }
-          .browser-warning a {
-            color: white;
-            text-decoration: underline;
-            font-weight: 600;
-          }
-          .browser-warning .close-btn {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-            padding: 0;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-          body.has-browser-warning {
-            padding-top: 60px;
-          }
-        `}
-      </Style>
     </head>
   )
 }
@@ -237,43 +198,15 @@ function Head({
 const Layout: FC = async (props) => {
   const db = drizzle(props.c.env.DB)
   const categories = await db.select().from(category).orderBy(category.name)
+  const theme = getThemeFromRequest(props.c)
+
   return (
     <>
       {html`<!DOCTYPE html>`}
-      <html lang='en' class='dark'>
-        <Head props={props} />
+      <html lang='en' class={getThemeClass(theme)}>
+        <Head props={props} theme={theme} />
         <body>
-          <noscript>
-            <div class='browser-warning'>
-              <strong>JavaScript Required:</strong> This website requires
-              JavaScript to function properly. Please enable JavaScript in your
-              browser settings or
-              <a
-                href='https://www.enable-javascript.com/'
-                target='_blank'
-                rel='noopener'>
-                learn how to enable JavaScript
-              </a>
-              .
-            </div>
-          </noscript>
-
-          <div
-            id='browser-warning'
-            class='browser-warning'
-            style='display: none;'>
-            <span id='warning-message'></span>
-            <button
-              class='close-btn'
-              onclick='closeBrowserWarning()'
-              aria-label='Close warning'>
-              ×
-            </button>
-          </div>
-
-          <script src='/browser-warning.js'></script>
-
-          <div id='main-content'>
+          <div id='main-content' class='w-full'>
             <Header categories={categories} c={props.c} />
             <main class='w-full h-full min-h-[60vh] mb-16'>
               {props.children}

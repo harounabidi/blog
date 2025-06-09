@@ -30,9 +30,6 @@ export default function Footer({ categories }: { categories: Category[] }) {
             <a href='/bio' class='text-sm hover:underline'>
               About Haroun
             </a>
-            <a href='/contact' class='text-sm hover:underline'>
-              Contact
-            </a>
           </div>
         </div>
       </div>

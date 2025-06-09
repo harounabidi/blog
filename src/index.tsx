@@ -4,9 +4,9 @@ import category from "./routes/category"
 import subscribe from "./routes/subscribe"
 import about from "./routes/about"
 import bio from "./routes/bio"
-import contact from "./routes/contact"
 import thankYou from "./routes/thank-you"
 import rss from "./routes/rss"
+import theme from "./routes/theme"
 import index from "./routes"
 import { serveStatic } from "hono/cloudflare-pages"
 
@@ -16,10 +16,10 @@ const routes = [
   index,
   bio,
   about,
-  contact,
   thankYou,
   subscribe,
   rss,
+  theme,
   article,
   category,
 ]
