@@ -2,7 +2,12 @@
 
 ## Urgent 🚨
 
-- [ ] Sitemap
+- [ ] Open graph image
+
+## Articles
+
+- [ ] Multi-tenant architecture
+- [ ] Hono vs Express
 
 ## Enhancements 🚀
 
@@ -10,8 +15,3 @@
 - [ ] Add image zoom feature
 - [ ] Add CodePen demo link
 - [ ] Pagination
-
-## Articles
-
-- [ ] Multi-tenant architecture
-- [ ] Hono vs Express

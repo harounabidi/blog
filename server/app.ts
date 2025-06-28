@@ -147,7 +147,7 @@ export default function App() {
   })
 
   app.get("/og.svg", (c) => {
-    return c.html(OG({}), 200, {
+    return c.html(OG({ c }), 200, {
       "Content-Type": "image/svg+xml",
     })
   })
@@ -157,6 +157,8 @@ export default function App() {
     const targetUrl = `${c.env.CLOUDINARY_URL}/${path}`
 
     const response = await fetch(targetUrl)
+
+    // TODO: Implement my own svg fallback
 
     if (!response.ok) {
       return c.redirect(

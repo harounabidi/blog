@@ -1,4 +1,5 @@
-import type { JSX } from "hono/jsx"
+import { Env } from "@/types/env"
+import { Context } from "hono"
 
 async function getBase64Image(url: string): Promise<string> {
   try {
@@ -28,14 +29,19 @@ function arrayBufferToBase64(buffer: ArrayBuffer) {
   return btoa(binary)
 }
 
-export default async function OG(props: JSX.HTMLAttributes) {
-  const imageUrl =
-    "https://res.cloudinary.com/dlez32qbe/image/upload/f_auto,q_auto,a_hflip/v1/blog/nihu6djfe5pdtvze9ryg"
+export default async function OG({
+  c,
+}: {
+  c: Context<{
+    Bindings: Env
+  }>
+}) {
+  const imageUrl = `${c.env.CLOUDINARY_URL}/f_webp,q_10,a_hflip/v1/blog/nihu6djfe5pdtvze9ryg`
   const base64Image = await getBase64Image(imageUrl)
 
-  const avatarUrl =
-    "https://res.cloudinary.com/dlez32qbe/image/upload/v1748861071/blog/uklqfhmy5xds1rltfqnl"
+  const avatarUrl = `${c.env.CLOUDINARY_URL}/f_webp,q_10/v1/blog/uklqfhmy5xds1rltfqnl`
   const base64Avatar = await getBase64Image(avatarUrl)
+
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -65,8 +71,8 @@ export default async function OG(props: JSX.HTMLAttributes) {
       <clipPath id='circleClip'>
         <circle cx='80' cy='557' r='23' />
       </clipPath>
+
       <image
-        // href='https://res.cloudinary.com/dlez32qbe/image/upload/v1748861071/blog/uklqfhmy5xds1rltfqnl'
         href={base64Avatar}
         x='57'
         y='540'
@@ -88,7 +94,6 @@ export default async function OG(props: JSX.HTMLAttributes) {
 
       <image
         anchor='end'
-        // href='https://res.cloudinary.com/dlez32qbe/image/upload/f_auto,q_auto,a_hflip/v1/blog/nihu6djfe5pdtvze9ryg'
         href={base64Image}
         x='700px'
         y='50px'
