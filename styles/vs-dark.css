@@ -27,7 +27,7 @@
 pre[class*="language-"],
 code[class*="language-"] {
   color: var(--code-text);
-  font-size: 13px;
+  font-size: 14px;
   text-shadow: none;
   font-family: "Geist Mono", Menlo, Monaco, Consolas, "Andale Mono",
     "Ubuntu Mono", "Courier New", monospace;

@@ -79,7 +79,7 @@ router.post("/subscribe", async (c) => {
   const encryptedEmail = await encryptWithPassword(email, c.env.ENCRYPTION_KEY)
 
   const body = helloNewSubscriber({
-    url: "https://blog.harounabidi.com",
+    url: "https://harounabidi.com",
     email: encryptedEmail,
     articles,
   })

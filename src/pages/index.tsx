@@ -15,10 +15,10 @@ export default function Home({
 }) {
   return (
     <Layout c={c}>
-      <div class='max-w-[45rem] mx-auto px-4'>
-        <h1 class='text-xl font-bold'>All articles</h1>
-      </div>
-      <Articles articles={articles} />
+      <section class='max-w-[45rem] my-2 mx-auto px-4'>
+        <h1 class='text-3xl font-bold mt-4'>All articles</h1>
+        <Articles articles={articles} />
+      </section>
     </Layout>
   )
 }

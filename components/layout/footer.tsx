@@ -4,6 +4,7 @@ import GitHub from "../icons/github"
 import Linkedin from "../icons/linkedin"
 import Subscribe from "../subscribe"
 import RSS from "../icons/rss"
+import Codepen from "../icons/codepen"
 
 export default function Footer({ categories }: { categories: Category[] }) {
   return (
@@ -25,10 +26,10 @@ export default function Footer({ categories }: { categories: Category[] }) {
           <div class='flex gap-2 flex-col w-full items-end justify-start'>
             <p class='mb-4 font-bold capitalize'>General</p>
             <a href='/about' class='text-sm hover:underline'>
-              About this blog
+              About the blog
             </a>
             <a href='/bio' class='text-sm hover:underline'>
-              About Haroun
+              About me
             </a>
           </div>
         </div>
@@ -44,6 +45,13 @@ export default function Footer({ categories }: { categories: Category[] }) {
             <At class='w-5 h-5' />
           </a>
           <a
+            href='https://codepen.io/harounabidi'
+            aria-label='Codepen'
+            target='_blank'
+            rel='noopener noreferrer'>
+            <Codepen class='w-5.5 h-5.5' />
+          </a>
+          <a
             href='https://github.com/harounabidi'
             aria-label='GitHub'
             target='_blank'
@@ -57,6 +65,7 @@ export default function Footer({ categories }: { categories: Category[] }) {
             rel='noopener noreferrer'>
             <Linkedin class='w-5.5 h-5.5' />
           </a>
+          <span>•</span>
           <a
             href='/rss.xml'
             aria-label='RSS Feed'

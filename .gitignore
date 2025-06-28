@@ -1,3 +1,8 @@
+# Node.js .gitignore template
+
+.vscode/
+.DS_Store
+
 # Logs
 
 logs

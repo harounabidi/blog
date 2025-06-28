@@ -2,14 +2,11 @@ import Footer from "@/components/layout/footer"
 import Header from "@/components/layout/header"
 import { category } from "@/schemas/drizzle"
 import { drizzle } from "drizzle-orm/d1"
+import { getCookie } from "hono/cookie"
 import { html } from "hono/html"
 import { FC } from "hono/jsx"
-import {
-  getThemeFromRequest,
-  getThemeClass,
-  getThemeStyleLinks,
-  getThemeScript,
-} from "@/utils/theme"
+
+type Theme = "dark" | "light"
 
 function Head({
   props,
@@ -25,7 +22,7 @@ function Head({
     updatedAt?: string
     categories?: string[]
   }
-  theme: "dark" | "light"
+  theme: Theme
 }) {
   return (
     <head>
@@ -45,7 +42,7 @@ function Head({
       />
       <link
         rel='canonical'
-        href={props.canonical || "https://blog.harounabidi.com"}
+        href={props.canonical || "https://harounabidi.com"}
       />
 
       {/* <meta
@@ -66,6 +63,7 @@ function Head({
         title='Haroun Abidi&#39;s Blog RSS Feed'
         href='/rss.xml'
       />
+
       <link
         rel='icon'
         type='image/x-icon'
@@ -108,7 +106,7 @@ function Head({
       />
       <meta
         property='og:url'
-        content={props.canonical || "https://blog.harounabidi.com"}
+        content={props.canonical || "https://harounabidi.com"}
       />
       <meta property='og:image' content={props.image || "/og.svg"} />
       <meta property='og:image:secure_url' content={props.image || "/og.svg"} />
@@ -133,9 +131,12 @@ function Head({
 
       <link href='/css/index.css' rel='stylesheet'></link>
 
-      {html`${getThemeStyleLinks(theme)}`}
+      <link
+        href={`${theme === "dark" ? "/css/vs-dark.css" : "/css/vs-light.css"}`}
+        rel='stylesheet'
+      />
 
-      {html`${getThemeScript()}`}
+      {/* {html`${getThemeScript()}`} */}
 
       <script src='/script.js' type='module'></script>
 
@@ -198,12 +199,12 @@ function Head({
 const Layout: FC = async (props) => {
   const db = drizzle(props.c.env.DB)
   const categories = await db.select().from(category).orderBy(category.name)
-  const theme = getThemeFromRequest(props.c)
+  const theme = getCookie(props.c, "theme") as Theme
 
   return (
     <>
       {html`<!DOCTYPE html>`}
-      <html lang='en' class={getThemeClass(theme)}>
+      <html lang='en' class={theme === "dark" ? "dark" : ""}>
         <Head props={props} theme={theme} />
         <body>
           <div id='main-content' class='w-full'>

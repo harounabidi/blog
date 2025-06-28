@@ -28,7 +28,7 @@ router.get("/rss.xml", async (c) => {
     .orderBy(desc(article.publishedAt))
     .limit(50) // Limit to last 50 articles
 
-  const baseUrl = "https://blog.harounabidi.com"
+  const baseUrl = "https://harounabidi.com"
   const lastBuildDate = new Date().toUTCString()
   const mostRecentArticle = articles[0] // Get the most recent (first in DESC ordered array)
   const lastPubDate = mostRecentArticle

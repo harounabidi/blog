@@ -2,16 +2,13 @@ import { Hono } from "hono"
 import { Env } from "../types/env"
 // import { csrf } from "hono/csrf"
 import NotFound from "../src/pages/404"
-import UnsupportedBrowserPage from "../src/pages/unsupported-browser"
 import { logger } from "hono/logger"
 import OG from "@/components/og"
 import { drizzle } from "drizzle-orm/d1"
 import { category, article } from "@/schemas/drizzle"
 import { eq } from "drizzle-orm"
-import {
-  checkBrowserSupport,
-  shouldBlockBrowser,
-} from "@/utils/browser-detection"
+import { middleware } from "./middleware"
+import Error from "@/src/pages/error"
 
 export function Router() {
   return new Hono<{ Bindings: Env }>({
@@ -45,45 +42,7 @@ export default function App() {
   // app.use("/article/*", csrf())
 
   app.use("*", logger())
-
-  // Browser detection middleware
-  app.use("*", async (c, next) => {
-    const userAgent = c.req.header("user-agent") || ""
-    const browserSupport = checkBrowserSupport(userAgent)
-
-    // Check if user wants to force access
-    const forceAccess = c.req.query("force") === "1"
-
-    // Skip browser check for static assets and API endpoints
-    const path = c.req.path
-    if (
-      path.startsWith("/favicon/") ||
-      path.startsWith("/css/") ||
-      path.startsWith("/script.js") ||
-      path.startsWith("/api/") ||
-      path.startsWith("/cdn/") ||
-      path.endsWith(".xml") ||
-      path.endsWith(".txt") ||
-      path.endsWith(".webmanifest") ||
-      path.endsWith(".svg") ||
-      forceAccess
-    ) {
-      return next()
-    }
-
-    // Block unsupported browsers
-    if (shouldBlockBrowser(browserSupport)) {
-      return c.html(
-        UnsupportedBrowserPage({
-          message: browserSupport.message!,
-          browserInfo: browserSupport.browserInfo,
-        }),
-        200
-      )
-    }
-
-    return next()
-  })
+  app.use("*", middleware)
 
   app.get("/robots.txt", (c) => {
     return c.text("User-agent: *\nDisallow: /api/", 200, {
@@ -92,6 +51,7 @@ export default function App() {
   })
 
   app.get("/manifest.webmanifest", (c) => {
+    // const theme = getCookie(c, "theme")
     return c.json(
       {
         name: "Haroun Abidi's Blog",
@@ -99,8 +59,9 @@ export default function App() {
         description: "A blog about web development, programming, and more.",
         start_url: "/",
         display: "standalone",
-        // background_color: "hsl(0, 0%, 10%)",
-        // theme_color: "hsl(0, 0%, 10%)",
+        // background_color:
+        //   theme === "dark" ? "hsl(0, 0%, 10%)" : "hsl(0, 0%, 100%)",
+        // theme_color: theme === "dark" ? "hsl(0, 0%, 10%)" : "hsl(0, 0%, 100%)",
         icons: [
           {
             src: "/favicon/android-chrome-192x192.png",
@@ -143,25 +104,25 @@ export default function App() {
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       <url>
-        <loc>https://blog.harounabidi.com/</loc>
+        <loc>https://harounabidi.com/</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
       </url>
       <url>
-        <loc>https://blog.harounabidi.com/bio</loc>
+        <loc>https://harounabidi.com/bio</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
       </url>
       <url>
-        <loc>https://blog.harounabidi.com/about</loc>
+        <loc>https://harounabidi.com/about</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
       </url>
       <url>
-        <loc>https://blog.harounabidi.com/contact</loc>
+        <loc>https://harounabidi.com/contact</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
@@ -169,7 +130,7 @@ export default function App() {
       ${articles
         .map(
           (article) => `<url>
-        <loc>https://blog.harounabidi.com/${article.categorySlug}/${
+        <loc>https://harounabidi.com/${article.categorySlug}/${
             article.slug
           }</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
@@ -218,19 +179,8 @@ export default function App() {
     return c.html(NotFound(c), 404)
   })
 
-  app.get("/unsupported-browser", (c) => {
-    // Default message and browser info for direct access
-    const message =
-      'Your browser is not supported. Please upgrade to a modern browser such as <a href="https://www.google.com/chrome/" target="_blank" rel="noopener">Chrome 111+</a>, <a href="https://www.microsoft.com/edge/" target="_blank" rel="noopener">Edge 111+</a>, <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener">Firefox 128+</a>, or <a href="https://www.apple.com/safari/" target="_blank" rel="noopener">Safari 16.4+</a>.'
-    const browserInfo = { browser: "unknown", version: 0, minor: 0 }
-
-    return c.html(
-      UnsupportedBrowserPage({
-        message,
-        browserInfo,
-      }),
-      200
-    )
+  app.onError((err, c) => {
+    return c.html(Error(c), 500)
   })
 
   return app

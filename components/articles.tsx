@@ -3,13 +3,13 @@ import { Article } from "@/types/article"
 export default function Articles({ articles }: { articles: Article[] }) {
   if (!articles || articles.length === 0) {
     return (
-      <section class='max-w-[45rem] my-8 mx-auto px-4'>
+      <div class='w-full mt-6'>
         <p class='text-lg text-foreground-muted'>Nothing to see here 🧐.</p>
-      </section>
+      </div>
     )
   }
   return (
-    <section class='max-w-[45rem] my-2 mx-auto px-4 divide-y'>
+    <div class='w-full divide-y'>
       {articles.map((article) => (
         <a
           href={`/${article.categorySlug}/${article.slug}`}
@@ -30,17 +30,24 @@ export default function Articles({ articles }: { articles: Article[] }) {
             </p>
           </div>
           {article.cover && (
-            <div class='relative hidden md:flex overflow-clip w-24 h-24 lg:w-32 lg:h-32 flex-shrink-0'>
+            <div
+              class='relative hidden image md:flex overflow-clip bg-cover bg-no-repeat rounded-sm w-24 h-24 lg:w-32 lg:h-32 flex-shrink-0'
+              style={{
+                backgroundImage: `url("${article.cover.replace(
+                  /(\/cdn\/)/,
+                  "$1c_scale,h_80,w_80/e_blur:800/f_webp/"
+                )}")`,
+              }}>
               <img
                 src={article.cover}
                 alt={article.title}
-                class='w-full h-full object-cover rounded-sm'
+                class='w-full h-full object-cover opacity-0'
                 loading='eager'
               />
             </div>
           )}
         </a>
       ))}
-    </section>
+    </div>
   )
 }

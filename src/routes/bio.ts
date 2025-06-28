@@ -9,11 +9,7 @@ router.get("/bio", async (c) => {
   const db = drizzle(c.env.DB)
   const categories = await db.select().from(category).orderBy(category.name)
 
-  return c.html(
-    Bio({
-      categories,
-    })
-  )
+  return c.html(Bio(c))
 })
 
 export default router

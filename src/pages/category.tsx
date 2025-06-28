@@ -18,10 +18,10 @@ export default function Category({
 }) {
   return (
     <Layout c={c} title={category.name}>
-      <div class='max-w-[45rem] mx-auto px-4'>
-        <h1 class='text-xl font-bold'>{category.name}</h1>
-      </div>
-      <Articles articles={articles} />
+      <section class='max-w-[45rem] my-2 mx-auto px-4'>
+        <h1 class='text-3xl font-bold mt-4'>{category.name}</h1>
+        <Articles articles={articles} />
+      </section>
     </Layout>
   )
 }

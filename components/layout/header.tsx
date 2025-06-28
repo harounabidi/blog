@@ -1,9 +1,10 @@
 import { Category } from "@/types/category"
-import ArrowLeft from "../icons/arrow-left"
 import ThemeSwitcher from "../ui/theme-switcher"
 import Categories from "../categories"
 import { Context } from "hono"
 import { Env } from "@/types/env"
+// import ChevronLeft from "../icons/chevron-left"
+// import ChevronRight from "../icons/chevron-right"
 
 export default function Header({
   c,
@@ -32,14 +33,15 @@ export default function Header({
             href='/'
             id='home-link'
             aria-label='Home'
-            class='px-4 md:px-9 py-5'>
-            <ArrowLeft class='w-5 h-5' />
+            class='px-4 md:px-9 py-5 font-bold'>
+            Home
           </a>
         ) : (
           <Categories categories={categories} path={c.req.path} />
         )}
 
-        <div class='flex items-center pl-3 pr-4 md:pr-9 gap-5'>
+        <div class='flex items-center pl-3 pr-4 md:pr-9 gap-2'>
+          {/* <ChevronRight class='w-5 h-5' /> */}
           <ThemeSwitcher />
         </div>
       </nav>

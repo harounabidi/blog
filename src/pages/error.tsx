@@ -5,7 +5,7 @@ import { getCookie } from "hono/cookie"
 
 type Theme = "dark" | "light"
 
-export default function NotFound(c: Context<{ Bindings: Env }>) {
+export default function Error(c: Context<{ Bindings: Env }>) {
   const theme = getCookie(c, "theme") as Theme
 
   return (
@@ -15,7 +15,7 @@ export default function NotFound(c: Context<{ Bindings: Env }>) {
         <head>
           <meta charSet='utf-8' />
           <meta name='viewport' content='width=device-width, initial-scale=1' />
-          <title>Not Found</title>
+          <title>Error</title>
           <link
             rel='icon'
             type='image/x-icon'
@@ -27,9 +27,9 @@ export default function NotFound(c: Context<{ Bindings: Env }>) {
         <body class='bg-background text-foreground'>
           <main class='max-w-[45rem] h-svh grid place-items-center my-4 mx-auto px-4'>
             <div class='flex flex-col items-center text-center'>
-              <h1 class='text-3xl font-bold mb-4'>404 - Not Found 😢</h1>
+              <h1 class='text-3xl font-bold mb-4'>Something went wrong 😢</h1>
               <p class='text-lg text-foreground-muted'>
-                The page you are looking for does not exist.
+                An unexpected error has occurred.
               </p>
               <a
                 href='/'

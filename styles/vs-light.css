@@ -28,6 +28,7 @@ pre[class*="language-"] {
   font-family: "Geist Mono", Menlo, Monaco, Consolas, "Andale Mono",
     "Ubuntu Mono", "Courier New", monospace;
   font-size: 14px;
+  text-shadow: none;
   line-height: 1.375;
   direction: ltr;
   text-align: left;
