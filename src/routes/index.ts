@@ -14,6 +14,7 @@ router.get("/", async (c) => {
     .select({
       id: article.id,
       title: article.title,
+      language: article.language,
       cover: article.cover,
       slug: article.slug,
       content: article.content,

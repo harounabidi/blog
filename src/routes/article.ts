@@ -81,6 +81,7 @@ router.post("/article", authenticateApiKey, async (c) => {
     const newArticle = {
       id: crypto.randomUUID(),
       title: String(formData.get("title") || "").trim(),
+      language: String(formData.get("language") || "").trim(),
       content: content,
       slug: slug,
       summary: String(formData.get("summary") || "").trim(),

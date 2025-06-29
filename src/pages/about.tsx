@@ -8,7 +8,10 @@ export default function About(
   }>
 ) {
   return (
-    <Layout c={c}>
+    <Layout
+      c={c}
+      description='A blog about web development, programming, and more.'
+      keywords='Haroun Abidi, software developer, ecommerce platforms, backend systems, Algeria, Hono.js, Cloudflare Workers, Next.js, React Native, distributed systems'>
       <section class='max-w-[45rem] space-y-4 my-2 mx-auto px-4'>
         <h1 class='text-3xl mt-4 font-bold'>About This Blog</h1>
         <p>

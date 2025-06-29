@@ -24,9 +24,15 @@
 }
 
 #article h1 {
-  font-size: 2em;
+  font-size: 1.75em;
   line-height: 1.2;
   font-weight: 700;
+}
+
+@media (width > 600px) {
+  #article h1 {
+    font-size: 2em;
+  }
 }
 
 #article h2 {
@@ -36,7 +42,8 @@
 }
 
 #article pre {
-  font-family: "Courier New", Courier, monospace;
+  font-family: Monaco, Menlo, Courier, "Courier New", "Ubuntu Mono", monospace;
+  direction: ltr !important;
   font-size: 14px;
   line-height: 1.5;
   margin: 0;
@@ -52,4 +59,14 @@
   border-left: 4px solid rgb(119, 119, 119);
   padding: 0 15px;
   color: var(--color-foreground-muted);
+}
+
+#article :not(pre) > code {
+  font-family: Monaco, Menlo, Courier, "Courier New", "Ubuntu Mono", monospace;
+  font-size: 14px;
+  font-weight: 500;
+  border: 0.75px solid var(--pre-border-color);
+  background-color: var(--pre-background-color);
+  padding: 2px 4px;
+  border-radius: 4px;
 }

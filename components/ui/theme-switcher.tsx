@@ -11,10 +11,10 @@ export default function ThemeSwitcher() {
       aria-pressed='false'
       title='Toggle dark mode'>
       <Moon
-        class='w-5 h-5 [grid-area:stack] invisible'
+        class='w-5.5 h-5.5 [grid-area:stack] invisible'
         id='theme-toggle-moon'
       />
-      <Sun class='w-5 h-5 [grid-area:stack]' id='theme-toggle-sun' />
+      <Sun class='w-5.5 h-5.5 [grid-area:stack]' id='theme-toggle-sun' />
     </button>
   )
 }

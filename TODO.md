@@ -2,12 +2,14 @@
 
 ## Urgent 🚨
 
-- [ ] Open graph image
+- [ ] i18n support
+- [ ] Vazirmatn font
 
 ## Articles
 
 - [ ] Multi-tenant architecture
 - [ ] Hono vs Express
+- [ ] ISR, SSR, CSR
 
 ## Enhancements 🚀
 
@@ -15,3 +17,5 @@
 - [ ] Add image zoom feature
 - [ ] Add CodePen demo link
 - [ ] Pagination
+- [ ] Edit article
+- [ ] Search

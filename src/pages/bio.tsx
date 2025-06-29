@@ -10,8 +10,8 @@ export default function Bio(
   return (
     <Layout
       c={c}
-      description='About Haroun Abidi'
-      keywords='Haroun Abidi, software developer, about me'>
+      description='I’m Haroun Abidi, a software developer from Algeria. I build ecommerce platforms and backend systems that connect to real-world business needs.'
+      keywords='Haroun Abidi, software developer, ecommerce platforms, backend systems, Algeria, Hono.js, Cloudflare Workers, Next.js, React Native, distributed systems'>
       <section class='max-w-[45rem] space-y-4 my-2 mx-auto px-4'>
         <div
           class='my-6 image rounded-full ring-2 w-28 ring-foreground-muted h-28 relative overflow-clip bg-cover bg-no-repeat'
@@ -28,9 +28,9 @@ export default function Bio(
             class='w-full h-full opacity-0 object-cover absolute top-0 left-0'
           />
         </div>
-        <h1 class='text-3xl font-bold'>Hey there! 👋</h1>
+        <h1 class='text-3xl font-bold'>Hey there!</h1>
         <p>
-          I'm Haroun, a software engineer from Algeria 🇩🇿. I build high-impact
+          I'm Haroun, a software engineer from Algeria. I build high-impact
           ecommerce platforms, dashboards, and backend systems that connect
           directly to real-world business needs — especially in emerging
           markets.

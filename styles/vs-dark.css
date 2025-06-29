@@ -29,8 +29,7 @@ code[class*="language-"] {
   color: var(--code-text);
   font-size: 14px;
   text-shadow: none;
-  font-family: "Geist Mono", Menlo, Monaco, Consolas, "Andale Mono",
-    "Ubuntu Mono", "Courier New", monospace;
+  font-family: Monaco, Menlo, Courier, "Courier New", "Ubuntu Mono", monospace;
   direction: ltr;
   text-align: left;
   white-space: pre;

@@ -4,26 +4,32 @@ export default function Articles({ articles }: { articles: Article[] }) {
   if (!articles || articles.length === 0) {
     return (
       <div class='w-full mt-6'>
-        <p class='text-lg text-foreground-muted'>Nothing to see here 🧐.</p>
+        <p class='lg:text-lg text-foreground-muted'>Nothing to see here.</p>
       </div>
     )
   }
+
   return (
     <div class='w-full divide-y'>
       {articles.map((article) => (
         <a
+          dir={article.language === "ar" ? "rtl" : "ltr"}
           href={`/${article.categorySlug}/${article.slug}`}
           key={article.id}
           class='flex justify-between py-6 gap-2 lg:gap-8'>
           <div>
             <h2 class='text-lg line-clamp-2 font-extrabold'>{article.title}</h2>
             <p class='text-sm my-2 text-foreground-muted'>
-              {new Date(article.createdAt).toLocaleDateString("en-UK", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              })}{" "}
-              • 📖 {article.readingTime} min read
+              {new Date(article.createdAt).toLocaleDateString(
+                article.language === "ar" ? "ar-DZ" : "en-UK",
+                {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                }
+              )}{" "}
+              • {article.readingTime}{" "}
+              {article.language === "ar" ? "دقائق قراءة" : "min read"}
             </p>
             <p class='mt-1 text-foreground-muted line-clamp-3'>
               {article.summary}

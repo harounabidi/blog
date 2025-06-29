@@ -146,10 +146,8 @@ export default function App() {
     })
   })
 
-  app.get("/og.svg", (c) => {
-    return c.html(OG({ c }), 200, {
-      "Content-Type": "image/svg+xml",
-    })
+  app.get("/og", async (c) => {
+    return c.redirect("/cdn/v1751131135/blog/og_rssr3f.png", 302)
   })
 
   app.get("/cdn/*", async (c) => {

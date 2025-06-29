@@ -3,8 +3,8 @@ import ThemeSwitcher from "../ui/theme-switcher"
 import Categories from "../categories"
 import { Context } from "hono"
 import { Env } from "@/types/env"
-// import ChevronLeft from "../icons/chevron-left"
-// import ChevronRight from "../icons/chevron-right"
+import ChevronLeft from "../icons/chevron-left"
+import ChevronRight from "../icons/chevron-right"
 
 export default function Header({
   c,
@@ -15,9 +15,11 @@ export default function Header({
   }>
   categories: Category[]
 }) {
-  console.log(c.req.path)
-  function isHomePage(): boolean {
+  function shouldShowCategories(): boolean {
     const pathname = c.req.path
+    if (pathname === "/bio" || pathname === "/about") {
+      return false
+    }
     return (
       pathname === "/" ||
       (pathname.split("/").length === 2 &&
@@ -28,13 +30,18 @@ export default function Header({
   return (
     <header class='w-full sticky z-20 top-0 max-w-3xl mx-auto'>
       <nav class='flex items-center h-16 bg-clip-padding backdrop-blur-sm backdrop-filte bg-linear-to-b from-background to-background/80 justify-between border-b'>
-        {!isHomePage() ? (
+        {!shouldShowCategories() ? (
           <a
             href='/'
             id='home-link'
             aria-label='Home'
             class='px-4 md:px-9 py-5 font-bold'>
             Home
+            {/* <img
+              src='/images/logo.png'
+              alt='logo'
+              class='w-7 h-7 object-cover'
+            /> */}
           </a>
         ) : (
           <Categories categories={categories} path={c.req.path} />

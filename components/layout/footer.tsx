@@ -18,17 +18,17 @@ export default function Footer({ categories }: { categories: Category[] }) {
               <a
                 href={`/${category.slug}`}
                 key={category.id}
-                class='text-sm hover:underline'>
+                class='text-sm hover:underline py-0.5'>
                 {category.name}
               </a>
             ))}
           </div>
           <div class='flex gap-2 flex-col w-full items-end justify-start'>
             <p class='mb-4 font-bold capitalize'>General</p>
-            <a href='/about' class='text-sm hover:underline'>
+            <a href='/about' class='text-sm py-0.5 hover:underline'>
               About the blog
             </a>
-            <a href='/bio' class='text-sm hover:underline'>
+            <a href='/bio' class='text-sm py-0.5 hover:underline'>
               About me
             </a>
           </div>
@@ -42,15 +42,15 @@ export default function Footer({ categories }: { categories: Category[] }) {
             aria-label='Email'
             target='_blank'
             rel='noopener noreferrer'>
-            <At class='w-5 h-5' />
+            <At class='w-5.5 h-5.5' />
           </a>
-          <a
+          {/* <a
             href='https://codepen.io/harounabidi'
             aria-label='Codepen'
             target='_blank'
             rel='noopener noreferrer'>
             <Codepen class='w-5.5 h-5.5' />
-          </a>
+          </a> */}
           <a
             href='https://github.com/harounabidi'
             aria-label='GitHub'
@@ -71,11 +71,11 @@ export default function Footer({ categories }: { categories: Category[] }) {
             aria-label='RSS Feed'
             target='_blank'
             rel='noopener noreferrer'>
-            <RSS class='w-5 h-5' aria-label='RSS Feed' />
+            <RSS class='w-5.5 h-5.5' aria-label='RSS Feed' />
           </a>
         </div>
         <p class='text-foreground-muted sm:w-full sm:text-start text-sm font-light'>
-          © {new Date().getFullYear()} Haroun Abidi.
+          © {new Date().getFullYear()} Haroun Abidi
         </p>
       </div>
     </footer>

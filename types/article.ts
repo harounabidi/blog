@@ -1,6 +1,7 @@
 export type Article = {
   id: string
   title: string
+  language: string
   cover: string
   slug: string
   content: string

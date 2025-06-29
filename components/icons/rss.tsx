@@ -3,9 +3,16 @@ import { JSX } from "hono/jsx"
 export default function RSS(props: JSX.HTMLAttributes) {
   return (
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' {...props}>
-      <path
-        fill='currentColor'
-        d='M3 17a4 4 0 0 1 4 4H3zm0-7c6.075 0 11 4.925 11 11h-2a9 9 0 0 0-9-9zm0-7c9.941 0 18 8.059 18 18h-2c0-8.837-7.163-16-16-16z'></path>
+      <g
+        fill='none'
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth={1.5}
+        color='currentColor'>
+        <path d='M12.992 20.5c.72 0 1-.004 1-.004c3.417-.025 5.3-.186 6.542-1.24C22 18.01 22 16.005 22 12s0-6.01-1.466-7.255S16.71 3.5 11.991 3.5s-7.078 0-8.544 1.245C2.324 5.698 2.062 7.097 2 9.5m.982 10h.01'></path>
+        <path d='M2 15.735c2.493 0 4.77 2.265 4.77 4.765m3.23 0c0-4.5-4.005-8-7.955-8'></path>
+      </g>
     </svg>
   )
 }

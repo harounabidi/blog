@@ -1,5 +1,10 @@
 export default function Image() {
   const div = document.querySelector(".image") as HTMLDivElement
+
+  if (!div) {
+    return
+  }
+
   const img = div.querySelector("img") as HTMLImageElement
 
   function loaded() {

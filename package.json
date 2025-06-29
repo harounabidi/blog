@@ -18,28 +18,29 @@
     "db:studio:local": "drizzle-kit studio --config=drizzle.config.local.ts"
   },
   "dependencies": {
-    "@tailwindcss/cli": "^4.1.8",
-    "@tailwindcss/postcss": "^4.1.8",
-    "drizzle-orm": "^0.44.1",
-    "hono": "^4.7.11",
-    "marked": "^15.0.12",
-    "marked-highlight": "^2.2.1",
-    "postcss": "^8.5.4",
+    "@tailwindcss/cli": "^4.1.11",
+    "@tailwindcss/postcss": "^4.1.11",
+    "better-sqlite3": "^12.1.1",
+    "drizzle-orm": "^0.44.2",
+    "hono": "^4.8.3",
+    "marked": "^16.0.0",
+    "marked-highlight": "^2.2.2",
+    "postcss": "^8.5.6",
     "prismjs": "^1.30.0",
     "sanitize-html": "^2.17.0",
-    "tailwindcss": "^4.1.8"
+    "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250601.0",
-    "@types/node": "^22.15.29",
+    "@cloudflare/workers-types": "^4.20250628.0",
+    "@types/node": "^24.0.7",
     "@types/prismjs": "^1.26.5",
     "@types/sanitize-html": "^2.16.0",
     "autoprefixer": "^10.4.21",
-    "concurrently": "^9.1.2",
+    "concurrently": "^9.2.0",
     "cssnano": "^7.0.7",
-    "dotenv": "^16.5.0",
-    "drizzle-kit": "^0.31.1",
+    "dotenv": "^17.0.0",
+    "drizzle-kit": "^0.31.4",
     "postcss-cli": "^11.0.1",
-    "wrangler": "^4.18.0"
+    "wrangler": "^4.22.0"
   }
 }

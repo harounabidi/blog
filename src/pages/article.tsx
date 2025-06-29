@@ -5,7 +5,6 @@ import ArticleCover from "@/components/article-cover"
 import { Context } from "hono"
 import { Env } from "@/types/env"
 import { Category } from "@/types/category"
-import { css } from "hono/css"
 
 export default function Article({
   c,
@@ -28,17 +27,24 @@ export default function Article({
       canonical={`https://harounabidi.com/${category.slug}/${article.slug}`}
       publishedAt={article.createdAt}
       updatedAt={article.updatedAt}
-      image={article.cover || "/og.svg"}>
-      <section id='article' class='max-w-[45rem] mx-auto px-4'>
+      image={article.cover || "/og"}>
+      <section
+        dir={article.language === "ar" ? "rtl" : "ltr"}
+        id='article'
+        class='max-w-[45rem] mx-auto px-4'>
         <h1>{article.title}</h1>
         <article>
           <p class='text-sm text-foreground-muted'>
-            {new Date(article.createdAt).toLocaleDateString("en-UK", {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })}{" "}
-            • 📖 {article.readingTime} min read
+            {new Date(article.createdAt).toLocaleDateString(
+              article.language === "ar" ? "ar-DZ" : "en-UK",
+              {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              }
+            )}{" "}
+            • {article.readingTime}{" "}
+            {article.language === "ar" ? "دقائق قراءة" : "min read"}
           </p>
 
           {article.cover && <ArticleCover cover={article.cover} />}

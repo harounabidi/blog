@@ -54,8 +54,6 @@ router.get("/:slug", async (c) => {
   const db = drizzle(c.env.DB)
   const slug = c.req.param("slug")
 
-  const allCategories = await db.select().from(category).orderBy(category.name)
-
   // Get the category by slug
   const categories = await db
     .select()
@@ -71,6 +69,7 @@ router.get("/:slug", async (c) => {
     .select({
       id: article.id,
       title: article.title,
+      language: article.language,
       slug: article.slug,
       content: article.content,
       summary: article.summary,

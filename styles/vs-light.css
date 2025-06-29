@@ -25,8 +25,7 @@
 
 code[class*="language-"],
 pre[class*="language-"] {
-  font-family: "Geist Mono", Menlo, Monaco, Consolas, "Andale Mono",
-    "Ubuntu Mono", "Courier New", monospace;
+  font-family: Monaco, Menlo, Courier, "Courier New", "Ubuntu Mono", monospace;
   font-size: 14px;
   text-shadow: none;
   line-height: 1.375;

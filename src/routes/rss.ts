@@ -9,7 +9,6 @@ const router = Router()
 router.get("/rss.xml", async (c) => {
   const db = drizzle(c.env.DB)
 
-  // Get all published articles with their categories
   const articles = await db
     .select({
       id: article.id,
@@ -26,18 +25,17 @@ router.get("/rss.xml", async (c) => {
     .from(article)
     .innerJoin(category, eq(article.categoryId, category.id))
     .orderBy(desc(article.publishedAt))
-    .limit(50) // Limit to last 50 articles
+    .limit(50)
 
   const baseUrl = "https://harounabidi.com"
   const lastBuildDate = new Date().toUTCString()
-  const mostRecentArticle = articles[0] // Get the most recent (first in DESC ordered array)
+  const mostRecentArticle = articles[0]
   const lastPubDate = mostRecentArticle
     ? new Date(
         mostRecentArticle.publishedAt || mostRecentArticle.createdAt
       ).toUTCString()
     : lastBuildDate
 
-  // Generate RSS XML
   const rssXml = `<?xml version="1.0" encoding="UTF-8"?>
     <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
       <channel>

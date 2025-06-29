@@ -108,15 +108,11 @@ function Head({
         property='og:url'
         content={props.canonical || "https://harounabidi.com"}
       />
-      <meta
-        name='image'
-        property='og:image'
-        content={props.image || "/og.svg"}
-      />
+      <meta name='image' property='og:image' content={props.image || "/og"} />
       <meta
         name='image'
         property='og:image:secure_url'
-        content={props.image || "/og.svg"}
+        content={props.image || "/og"}
       />
       <meta property='og:image:width' content='1200' />
       <meta property='og:image:height' content='630' />
@@ -133,7 +129,7 @@ function Head({
           "Short tutorials for developers. Next.js, React, CSS, Animation, and more!"
         }
       />
-      <meta name='twitter:image' content={props.image || "/og.svg"} />
+      <meta name='twitter:image' content={props.image || "/og"} />
 
       <meta name='twitter:image:alt' content="Haroun Abidi's Blog" />
 
