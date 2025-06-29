@@ -218,7 +218,7 @@ function Body({
                     <p
                       style='margin: 0 0 20px 0; font-size: 16px; color: #1a1a1a; font-family: Arial, sans-serif; line-height: 1.6;'
                       class='dark-mode-text fallback-font'>
-                      You've successfully subscribed to my main blog 🎉
+                      You've successfully subscribed to my main blog
                     </p>
 
                     <p
@@ -243,7 +243,7 @@ function Body({
                     <h2
                       style='margin: 30px 0 20px 0; font-size: 20px; font-weight: 700; color: #1a1a1a; font-family: Arial, sans-serif;'
                       class='dark-mode-text fallback-font'>
-                      Most recent articles 📝
+                      Most recent articles
                     </h2>
 
                     <Articles articles={articles} url={url} />
@@ -323,6 +323,7 @@ function Articles({ articles, url }: { articles: Article[]; url: string }) {
           <tr>
             <td>
               <a
+                dir={article.language === "ar" ? "rtl" : "ltr"}
                 href={`${url}/${article.categorySlug}/${article.slug}`}
                 target='_blank'
                 style='text-decoration: none; color: inherit; display: block;'>
@@ -339,7 +340,7 @@ function Articles({ articles, url }: { articles: Article[]; url: string }) {
                     month: "short",
                     day: "numeric",
                   })}{" "}
-                  • 📖 {article.readingTime} min read
+                  • {article.readingTime} min read
                 </p>
                 <p
                   class='summary dark-mode-muted'

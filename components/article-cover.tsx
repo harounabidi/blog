@@ -1,7 +1,7 @@
 export default function ArticleCover({ cover }: { cover: string }) {
   return (
     <div
-      className='relative image rounded-sm overflow-clip bg-cover bg-no-repeat w-full h-64 lg:h-96 mb-6'
+      className='image'
       style={{
         backgroundImage: `url("${cover.replace(
           /(\/cdn\/)/,

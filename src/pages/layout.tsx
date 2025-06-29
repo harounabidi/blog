@@ -140,8 +140,6 @@ function Head({
         rel='stylesheet'
       />
 
-      {/* {html`${getThemeScript()}`} */}
-
       <script src='/script.js' type='module'></script>
 
       <link

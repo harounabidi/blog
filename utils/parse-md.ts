@@ -24,6 +24,20 @@ const marked = new Marked(
   })
 )
 
+marked.use({
+  renderer: {
+    image(token) {
+      const { href, text } = token
+      const blurredUrl = href.replace(
+        /(\/cdn\/)/,
+        "$1c_scale,h_80/e_blur:50/f_webp/"
+      )
+      const imgTag = `<img src="${href}" class="opacity-0" width="1200" height="630" alt="${text}" title="${text}">`
+      return `<div class="image" style="background-image: url('${blurredUrl}');">${imgTag}</div>`
+    },
+  },
+})
+
 const sanitizeHtmlOptions = {
   allowedTags: sanitizeHtml.defaults.allowedTags.concat([
     "img",

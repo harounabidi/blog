@@ -3,15 +3,41 @@ import { JSX } from "hono/jsx"
 export default function RSS(props: JSX.HTMLAttributes) {
   return (
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' {...props}>
+      <circle cx={5} cy={19} r={0} fill='currentColor'>
+        <animate
+          fill='freeze'
+          attributeName='r'
+          dur='0.2s'
+          values='0;2'></animate>
+      </circle>
       <g
         fill='none'
         stroke='currentColor'
         strokeLinecap='round'
         strokeLinejoin='round'
-        strokeWidth={1.5}
-        color='currentColor'>
-        <path d='M12.992 20.5c.72 0 1-.004 1-.004c3.417-.025 5.3-.186 6.542-1.24C22 18.01 22 16.005 22 12s0-6.01-1.466-7.255S16.71 3.5 11.991 3.5s-7.078 0-8.544 1.245C2.324 5.698 2.062 7.097 2 9.5m.982 10h.01'></path>
-        <path d='M2 15.735c2.493 0 4.77 2.265 4.77 4.765m3.23 0c0-4.5-4.005-8-7.955-8'></path>
+        strokeWidth={2.5}>
+        <path
+          strokeDasharray={16}
+          strokeDashoffset={16}
+          d='M4 11c2.39 0 4.68 0.95 6.36 2.64c1.69 1.68 2.64 3.97 2.64 6.36'>
+          <animate
+            fill='freeze'
+            attributeName='stroke-dashoffset'
+            begin='0.2s'
+            dur='0.3s'
+            values='16;0'></animate>
+        </path>
+        <path
+          strokeDasharray={28}
+          strokeDashoffset={28}
+          d='M4 4c4.24 0 8.31 1.69 11.31 4.69c3 3 4.69 7.07 4.69 11.31'>
+          <animate
+            fill='freeze'
+            attributeName='stroke-dashoffset'
+            begin='0.6s'
+            dur='0.4s'
+            values='28;0'></animate>
+        </path>
       </g>
     </svg>
   )

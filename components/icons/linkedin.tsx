@@ -4,15 +4,46 @@ export default function Linkedin(props: JSX.HTMLAttributes) {
   return (
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' {...props}>
       <title>LinkedIn</title>
+      <circle cx={4} cy={4} r={2} fill='currentColor' fillOpacity={0}>
+        <animate
+          fill='freeze'
+          attributeName='fill-opacity'
+          dur='0.15s'
+          values='0;1'></animate>
+      </circle>
       <g
         fill='none'
         stroke='currentColor'
         strokeLinecap='round'
         strokeLinejoin='round'
-        strokeWidth={1.6}
-        color='currentColor'>
-        <path d='M7 10v7m4-4v4m0-4a3 3 0 1 1 6 0v4m-6-4v-3M7.008 7h-.009'></path>
-        <path d='M2.5 12c0-4.478 0-6.718 1.391-8.109S7.521 2.5 12 2.5c4.478 0 6.718 0 8.109 1.391S21.5 7.521 21.5 12c0 4.478 0 6.718-1.391 8.109S16.479 21.5 12 21.5c-4.478 0-6.718 0-8.109-1.391S2.5 16.479 2.5 12'></path>
+        strokeWidth={3}>
+        <path strokeDasharray={12} strokeDashoffset={12} d='M4 10v10'>
+          <animate
+            fill='freeze'
+            attributeName='stroke-dashoffset'
+            begin='0.15s'
+            dur='0.2s'
+            values='12;0'></animate>
+        </path>
+        <path strokeDasharray={12} strokeDashoffset={12} d='M10 10v10'>
+          <animate
+            fill='freeze'
+            attributeName='stroke-dashoffset'
+            begin='0.45s'
+            dur='0.2s'
+            values='12;0'></animate>
+        </path>
+        <path
+          strokeDasharray={24}
+          strokeDashoffset={24}
+          d='M10 15c0 -2.76 2.24 -5 5 -5c2.76 0 5 2.24 5 5v5'>
+          <animate
+            fill='freeze'
+            attributeName='stroke-dashoffset'
+            begin='0.65s'
+            dur='0.2s'
+            values='24;0'></animate>
+        </path>
       </g>
     </svg>
   )

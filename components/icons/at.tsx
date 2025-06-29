@@ -4,17 +4,21 @@ export default function At(props: JSX.HTMLAttributes) {
   return (
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' {...props}>
       <title>Email</title>
-      <g
+      <path
         fill='none'
         stroke='currentColor'
+        strokeDasharray={88}
+        strokeDashoffset={88}
         strokeLinecap='round'
         strokeLinejoin='round'
-        strokeWidth={1.6}
-        color='currentColor'>
-        <path d='m7 7.5l2.942 1.74c1.715 1.014 2.4 1.014 4.116 0L17 7.5'></path>
-        <path d='M10.5 19.5a116 116 0 0 1-1.401-.027c-3.149-.079-4.723-.118-5.854-1.255c-1.131-1.136-1.164-2.67-1.23-5.737a69 69 0 0 1 0-2.953c.066-3.067.099-4.6 1.23-5.737C4.376 2.655 5.95 2.616 9.099 2.537a115 115 0 0 1 5.802 0c3.149.079 4.723.118 5.854 1.254s1.164 2.67 1.23 5.737c.009.455.014.668.015.972'></path>
-        <path d='M19 17a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0m0 0v.5a1.5 1.5 0 0 0 3 0V17a4.5 4.5 0 1 0-4.5 4.5'></path>
-      </g>
+        strokeWidth={2.5}
+        d='M16 12c0 2.21 -1.79 4 -4 4c-2.21 0 -4 -1.79 -4 -4c0 -2.21 1.79 -4 4 -4c2.21 0 4 1.79 4 4v1.5c0 1.38 1.12 2.5 2.5 2.5c1.38 0 2.5 -1.12 2.5 -2.5v-1.5c0 -4.97 -4.03 -9 -9 -9c-4.97 0 -9 4.03 -9 9c0 4.97 4.03 9 9 9h4'>
+        <animate
+          fill='freeze'
+          attributeName='stroke-dashoffset'
+          dur='1s'
+          values='88;0'></animate>
+      </path>
     </svg>
   )
 }

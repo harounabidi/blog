@@ -2,8 +2,12 @@
 
 ## Urgent 🚨
 
+- [ ] Avoid large layout shifts
+- [ ] Font load optimization
+- [ ] Images width and height
+- [ ] Properly size images
+- [ ] Largest Contentful Paint element
 - [ ] i18n support
-- [ ] Vazirmatn font
 
 ## Articles
 

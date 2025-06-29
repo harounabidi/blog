@@ -3,16 +3,79 @@ import { JSX } from "hono/jsx"
 export default function Sun(props: JSX.HTMLAttributes) {
   return (
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' {...props}>
-      <path fill='currentColor' d='M17 12a5 5 0 1 1-10 0a5 5 0 0 1 10 0'></path>
-      <path
-        fill='currentColor'
-        fillRule='evenodd'
-        d='M12 1.25a.75.75 0 0 1 .75.75v2a.75.75 0 0 1-1.5 0V2a.75.75 0 0 1 .75-.75M1.25 12a.75.75 0 0 1 .75-.75h2a.75.75 0 0 1 0 1.5H2a.75.75 0 0 1-.75-.75m18 0a.75.75 0 0 1 .75-.75h2a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1-.75-.75M12 19.25a.75.75 0 0 1 .75.75v2a.75.75 0 0 1-1.5 0v-2a.75.75 0 0 1 .75-.75'
-        clipRule='evenodd'></path>
-      <path
-        fill='currentColor'
-        d='M3.67 3.716a.75.75 0 0 1 1.059-.048L6.95 5.7a.75.75 0 0 1-1.012 1.107L3.717 4.775a.75.75 0 0 1-.048-1.06m16.663.001a.75.75 0 0 1-.047 1.06l-2.223 2.03A.75.75 0 1 1 17.05 5.7l2.222-2.032a.75.75 0 0 1 1.06.048m-3.306 13.309a.75.75 0 0 1 1.06 0l2.223 2.222a.75.75 0 1 1-1.061 1.06l-2.222-2.222a.75.75 0 0 1 0-1.06m-10.051 0a.75.75 0 0 1 0 1.06l-2.222 2.223a.75.75 0 0 1-1.06-1.06l2.222-2.223a.75.75 0 0 1 1.06 0'
-        opacity={0.5}></path>
+      <g
+        fill='none'
+        stroke='currentColor'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+        stroke-width='2'>
+        <path
+          stroke-dasharray='2'
+          stroke-dashoffset='2'
+          d='M12 19v1M19 12h1M12 5v-1M5 12h-1'>
+          <animate
+            fill='freeze'
+            attributeName='d'
+            begin='0.6s'
+            dur='0.2s'
+            values='M12 19v1M19 12h1M12 5v-1M5 12h-1;M12 21v1M21 12h1M12 3v-1M3 12h-1'
+          />
+          <animate
+            fill='freeze'
+            attributeName='stroke-dashoffset'
+            begin='0.6s'
+            dur='0.2s'
+            values='2;0'
+          />
+        </path>
+        <path
+          stroke-dasharray='2'
+          stroke-dashoffset='2'
+          d='M17 17l0.5 0.5M17 7l0.5 -0.5M7 7l-0.5 -0.5M7 17l-0.5 0.5'>
+          <animate
+            fill='freeze'
+            attributeName='d'
+            begin='0.8s'
+            dur='0.2s'
+            values='M17 17l0.5 0.5M17 7l0.5 -0.5M7 7l-0.5 -0.5M7 17l-0.5 0.5;M18.5 18.5l0.5 0.5M18.5 5.5l0.5 -0.5M5.5 5.5l-0.5 -0.5M5.5 18.5l-0.5 0.5'
+          />
+          <animate
+            fill='freeze'
+            attributeName='stroke-dashoffset'
+            begin='0.8s'
+            dur='0.2s'
+            values='2;0'
+          />
+        </path>
+        <animateTransform
+          attributeName='transform'
+          dur='30s'
+          repeatCount='indefinite'
+          type='rotate'
+          values='0 12 12;360 12 12'
+        />
+      </g>
+      <mask id='lineMdMoonFilledAltToSunnyFilledLoopTransition0'>
+        <circle cx='12' cy='12' r='12' fill='#fff' />
+        <circle cx='18' cy='6' r='12' fill='#fff'>
+          <animate fill='freeze' attributeName='cx' dur='0.4s' values='18;22' />
+          <animate fill='freeze' attributeName='cy' dur='0.4s' values='6;2' />
+          <animate fill='freeze' attributeName='r' dur='0.4s' values='12;3' />
+        </circle>
+        <circle cx='18' cy='6' r='10'>
+          <animate fill='freeze' attributeName='cx' dur='0.4s' values='18;22' />
+          <animate fill='freeze' attributeName='cy' dur='0.4s' values='6;2' />
+          <animate fill='freeze' attributeName='r' dur='0.4s' values='10;1' />
+        </circle>
+      </mask>
+      <circle
+        cx='12'
+        cy='12'
+        r='10'
+        mask='url(#lineMdMoonFilledAltToSunnyFilledLoopTransition0)'
+        fill='currentColor'>
+        <animate fill='freeze' attributeName='r' dur='0.4s' values='10;6' />
+      </circle>
     </svg>
   )
 }
