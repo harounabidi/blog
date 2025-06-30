@@ -14,7 +14,7 @@ export default function Bio(
       keywords='Haroun Abidi, software developer, ecommerce platforms, backend systems, Algeria, Hono.js, Cloudflare Workers, Next.js, React Native, distributed systems'>
       <section class='max-w-[45rem] space-y-4 my-2 mx-auto px-4'>
         <div
-          class='my-6 image rounded-full ring-2 w-28 ring-foreground-muted h-28 relative overflow-clip bg-cover bg-no-repeat'
+          class='my-6 image rounded-full ring-2 w-28 ring-foreground-muted h-28'
           style={{
             backgroundImage: `url("${"/cdn/a_hflip/blog/P6250325_copy_2_l145s6".replace(
               /(\/cdn\/)/,

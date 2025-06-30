@@ -217,13 +217,14 @@ footer input[type="email"] {
 }
 
 .image {
-  border-radius: var(--radius-sm);
-  aspect-ratio: 1.91 / 1;
   position: relative;
   overflow: clip;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  width: 100%;
-  margin-bottom: calc(var(--spacing) * 6);
+}
+
+.image img {
+  text-indent: -9999px;
+  font-size: 0;
 }

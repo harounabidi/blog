@@ -133,11 +133,29 @@ function Head({
 
       <meta name='twitter:image:alt' content="Haroun Abidi's Blog" />
 
-      <link href='/css/index.css' rel='stylesheet'></link>
+      <link href='/css/index.css' rel='stylesheet' />
 
       <link
         href={`${theme === "dark" ? "/css/vs-dark.css" : "/css/vs-light.css"}`}
         rel='stylesheet'
+        media='print'
+        onload="this.media='all'"
+      />
+
+      <link
+        rel='preload'
+        as='font'
+        type='font/woff2'
+        href='/fonts/Vazirmatn-Regular.woff2'
+        crossorigin='anonymous'
+      />
+
+      <link
+        rel='preload'
+        as='font'
+        type='font/woff2'
+        href='/fonts/Vazirmatn-Bold.woff2'
+        crossorigin='anonymous'
       />
 
       <script src='/script.js' type='module'></script>

@@ -2,16 +2,10 @@
 
 ## Urgent 🚨
 
-- [ ] Avoid large layout shifts
-- [ ] Font load optimization
-- [ ] Images width and height
-- [ ] Properly size images
-- [ ] Largest Contentful Paint element
-- [ ] i18n support
+- [ ] Eliminate render-blocking resources index.css
 
 ## Articles
 
-- [ ] Multi-tenant architecture
 - [ ] Hono vs Express
 - [ ] ISR, SSR, CSR
 
@@ -23,3 +17,4 @@
 - [ ] Pagination
 - [ ] Edit article
 - [ ] Search
+- [ ] i18n support

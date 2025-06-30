@@ -1,7 +1,7 @@
 :root {
   /* Light theme colors for syntax highlighting */
   --light-text-primary: hsl(228, 18%, 45%);
-  --light-text-secondary: hsl(229, 13%, 59%);
+  --light-text-secondary: hsl(101, 30%, 36%);
   --light-text-tertiary: hsl(228, 16%, 65%);
   --light-punctuation: hsl(227, 18%, 45%);
   --light-selection-bg: hsl(230, 39%, 91%);
@@ -10,7 +10,7 @@
 
   /* Token colors */
   --light-number: hsl(25, 66%, 41%);
-  --light-property: hsl(38, 60%, 47%);
+  --light-property: hsl(38, 60%, 32%);
   --light-tag: hsl(207, 62%, 43%);
   --light-string: hsl(194, 70%, 35%);
   --light-selector: hsl(229, 50%, 60%);

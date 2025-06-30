@@ -28,12 +28,52 @@ marked.use({
   renderer: {
     image(token) {
       const { href, text } = token
+      // Create responsive image variants
+      const createVariant = (width: number) => {
+        return `${href.replace(
+          /\/cdn\//,
+          `/cdn/c_scale,w_${width}/f_auto/`
+        )} ${width}w`
+      }
+
+      // Generate blurred placeholder
       const blurredUrl = href.replace(
         /(\/cdn\/)/,
-        "$1c_scale,h_80/e_blur:50/f_webp/"
+        "$1c_scale,w_20/e_blur:80/f_webp/"
       )
-      const imgTag = `<img src="${href}" class="opacity-0" width="1200" height="630" alt="${text}" title="${text}">`
-      return `<div class="image" style="background-image: url('${blurredUrl}');">${imgTag}</div>`
+
+      // Create srcset with multiple resolution variants
+      const srcSet = [
+        createVariant(1200),
+        createVariant(800),
+        createVariant(600),
+        createVariant(400),
+        createVariant(200),
+      ].join(", ")
+
+      // Set appropriate sizes attribute
+      const sizes = "(max-width: 600px) 100vw, (max-width: 1200px) 80vw, 1200px"
+
+      const imgTag = `
+      <img 
+        src="${href}" 
+        class="opacity-0" 
+        width="1200" 
+        height="630" 
+        srcset="${srcSet}"
+        sizes="${sizes}"
+        loading="lazy"
+        alt="${text}" 
+        title="${text}"
+        >`
+
+      return `
+      <div 
+        class="image" 
+        style="background-image: url('${blurredUrl}');"
+      >
+        ${imgTag}
+      </div>`
     },
   },
 })
