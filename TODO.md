@@ -2,12 +2,13 @@
 
 ## Urgent 🚨
 
+- [ ] Image not found
 - [ ] Eliminate render-blocking resources index.css
 
 ## Articles
 
 - [ ] Hono vs Express
-- [ ] ISR, SSR, CSR
+- [ ] ISR, SSR, CSR, SSG
 
 ## Enhancements 🚀
 

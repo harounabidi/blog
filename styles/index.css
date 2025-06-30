@@ -222,9 +222,15 @@ footer input[type="email"] {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  transition: background-image 0.3s ease-out;
+}
+
+.image.image-loaded {
+  background-image: none !important;
 }
 
 .image img {
   text-indent: -9999px;
   font-size: 0;
+  transition: opacity 0.3s ease-out;
 }

@@ -74,6 +74,11 @@
 #article ul {
   list-style: disc;
   list-style-position: inside;
+  padding-inline-start: 0.75em;
+}
+
+#article ul li::marker {
+  color: var(--color-foreground-muted);
 }
 
 #article img {
@@ -81,7 +86,7 @@
   height: auto;
   display: block;
   border-radius: 4px;
-  border: 0.75px solid var(--pre-border-color);
+  /* border: 0.75px solid var(--pre-border-color); */
 }
 
 #article .image {

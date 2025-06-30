@@ -43,8 +43,16 @@ export default function Article({
                 day: "numeric",
               }
             )}{" "}
-            • {article.readingTime}{" "}
-            {article.language === "ar" ? "دقائق قراءة" : "min read"}
+            •{" "}
+            {article.language === "ar"
+              ? article.readingTime === 1
+                ? "دقيقة قراءة"
+                : article.readingTime === 2
+                ? "دقيقتان قراءة"
+                : article.readingTime > 10
+                ? `${article.readingTime} دقيقة قراءة`
+                : `${article.readingTime} دقائق قراءة`
+              : `${article.readingTime} mins read`}
           </p>
 
           {article.cover && <ArticleCover cover={article.cover} />}

@@ -28,14 +28,22 @@ export default function Articles({ articles }: { articles: Article[] }) {
                   day: "numeric",
                 }
               )}{" "}
-              • {article.readingTime}{" "}
-              {article.language === "ar" ? "دقائق قراءة" : "min read"}
+              •{" "}
+              {article.language === "ar"
+                ? article.readingTime === 1
+                  ? "دقيقة قراءة"
+                  : article.readingTime === 2
+                  ? "دقيقتان قراءة"
+                  : article.readingTime > 10
+                  ? `${article.readingTime} دقيقة قراءة`
+                  : `${article.readingTime} دقائق قراءة`
+                : `${article.readingTime} mins read`}
             </p>
             <p class='mt-1 text-foreground-muted line-clamp-3'>
               {article.summary}
             </p>
           </div>
-          {article.cover && (
+          {/* {article.cover && (
             <div
               class='relative hidden image md:flex overflow-clip bg-cover bg-no-repeat rounded-sm w-24 h-24 lg:w-32 lg:h-32 flex-shrink-0'
               style={{
@@ -51,7 +59,7 @@ export default function Articles({ articles }: { articles: Article[] }) {
                 loading='eager'
               />
             </div>
-          )}
+          )} */}
         </a>
       ))}
     </div>

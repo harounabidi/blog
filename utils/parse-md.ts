@@ -57,7 +57,7 @@ marked.use({
       const imgTag = `
       <img 
         src="${href}" 
-        class="opacity-0" 
+        class="opacity-0 transition-opacity duration-300" 
         width="1200" 
         height="630" 
         srcset="${srcSet}"
@@ -71,6 +71,7 @@ marked.use({
       <div 
         class="image" 
         style="background-image: url('${blurredUrl}');"
+        data-loaded="false"
       >
         ${imgTag}
       </div>`

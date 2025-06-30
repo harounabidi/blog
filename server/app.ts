@@ -9,6 +9,7 @@ import { category, article } from "@/schemas/drizzle"
 import { eq } from "drizzle-orm"
 import { middleware } from "./middleware"
 import Error from "@/src/pages/error"
+import Image from "@/components/image"
 
 export function Router() {
   return new Hono<{ Bindings: Env }>({
@@ -159,9 +160,12 @@ export default function App() {
     // TODO: Implement my own svg fallback
 
     if (!response.ok) {
-      return c.redirect(
-        "https://placehold.co/600x400?text=Image+Not+Found&font=source-sans-pro",
-        302
+      return c.html(
+        Image({ title: "Image not found", width: 1200, height: 630 }),
+        404,
+        {
+          "Content-Type": "image/svg+xml",
+        }
       )
     }
 
