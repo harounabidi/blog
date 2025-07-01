@@ -4,7 +4,7 @@ import Linkedin from "@/components/icons/linkedin"
 import { Article } from "@/types/article"
 import { html } from "hono/html"
 
-export default function Article({
+export default function EmailArticle({
   url,
   email,
   article,
@@ -308,6 +308,7 @@ function SingleArticle({ article, url }: { article: Article; url: string }) {
       <tr>
         <td>
           <a
+            dir={article.language === "ar" ? "rtl" : "ltr"}
             href={`${url}/${article.categorySlug}/${article.slug}`}
             target='_blank'
             style='text-decoration: none; color: inherit; display: block;'>
@@ -319,12 +320,24 @@ function SingleArticle({ article, url }: { article: Article; url: string }) {
             <p
               class='date dark-mode-muted'
               style='margin: 0 0 12px 0; font-size: 14px; color: #757575; font-family: Arial, sans-serif;'>
-              {new Date(article.createdAt).toLocaleDateString("en-UK", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              })}{" "}
-              • 📖 {article.readingTime} min read
+              {new Date(article.createdAt).toLocaleDateString(
+                article.language === "ar" ? "ar-DZ" : "en-UK",
+                {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                }
+              )}{" "}
+              •{" "}
+              {article.language === "ar"
+                ? article.readingTime === 1
+                  ? "دقيقة قراءة"
+                  : article.readingTime === 2
+                  ? "دقيقتان قراءة"
+                  : article.readingTime > 10
+                  ? `${article.readingTime} دقيقة قراءة`
+                  : `${article.readingTime} دقائق قراءة`
+                : `${article.readingTime} mins read`}
             </p>
             <p
               class='summary dark-mode-text'
@@ -372,7 +385,9 @@ function SingleArticle({ article, url }: { article: Article; url: string }) {
                           href={`${url}/${article.categorySlug}/${article.slug}`}
                           target='_blank'
                           style='color: #ffffff; text-decoration: none; display: block;'>
-                          Read Article →
+                          {article.language === "ar"
+                            ? "اقرأ المقالة ←"
+                            : "Read Article →"}
                         </a>
                       </td>
                     </tr>

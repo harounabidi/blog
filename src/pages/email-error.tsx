@@ -19,7 +19,13 @@ export default async function EmailError({
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <title>Email Not Found</title>
         <link rel='icon' type='image/x-icon' href='/favicon.ico' />
-        <link rel='stylesheet' href='/css/index.css' />
+        <link
+          rel='stylesheet'
+          href='/css/index.css'
+          media='print'
+          onload="this.media='all'"
+        />
+        <link rel='preload' href='/css/index.css' as='style' />
       </head>
       <body>
         <main class='max-w-[45rem] w-full space-y-4 my-8 mx-auto px-4'>

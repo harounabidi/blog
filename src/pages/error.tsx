@@ -22,7 +22,12 @@ export default function Error(c: Context<{ Bindings: Env }>) {
             href='/favicon.ico'
             sizes='16x16'
           />
-          <link href='/css/index.css' rel='stylesheet'></link>
+          <link
+            href='/css/index.css'
+            rel='stylesheet'
+            media='print'
+            onload="this.media='all'"></link>
+          <link rel='preload' href='/css/index.css' as='style' />
         </head>
         <body class='bg-background text-foreground'>
           <main class='max-w-[45rem] h-svh grid place-items-center my-4 mx-auto px-4'>

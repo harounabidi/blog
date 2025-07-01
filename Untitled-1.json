@@ -1,0 +1,32 @@
+[
+  {
+    "email_address": {
+      "address": "paul.s@zfashions.com",
+      "name": "Paul"
+    },
+    "merge_info": {
+      "contact": "98********",
+      "company": "Z fashions"
+    }
+  },
+  {
+    "email_address": {
+      "address": "rebecca@zcorp.com",
+      "name": "Rebecca"
+    },
+    "merge_info": {
+      "contact": "87********",
+      "company": "Z Inc."
+    }
+  },
+  {
+    "email_address": {
+      "address": "george@zfashions.com",
+      "name": "George"
+    },
+    "merge_info": {
+      "contact": "87********",
+      "company": "Z fashions"
+    }
+  }
+]

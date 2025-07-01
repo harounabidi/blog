@@ -335,12 +335,24 @@ function Articles({ articles, url }: { articles: Article[]; url: string }) {
                 <p
                   class='date dark-mode-muted'
                   style='margin: 0 0 8px 0; font-size: 14px; color: #757575; font-family: Arial, sans-serif;'>
-                  {new Date(article.createdAt).toLocaleDateString("en-UK", {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  })}{" "}
-                  • {article.readingTime} min read
+                  {new Date(article.createdAt).toLocaleDateString(
+                    article.language === "ar" ? "ar-DZ" : "en-UK",
+                    {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    }
+                  )}{" "}
+                  •{" "}
+                  {article.language === "ar"
+                    ? article.readingTime === 1
+                      ? "دقيقة قراءة"
+                      : article.readingTime === 2
+                      ? "دقيقتان قراءة"
+                      : article.readingTime > 10
+                      ? `${article.readingTime} دقيقة قراءة`
+                      : `${article.readingTime} دقائق قراءة`
+                    : `${article.readingTime} mins read`}
                 </p>
                 <p
                   class='summary dark-mode-muted'

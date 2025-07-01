@@ -2,8 +2,9 @@
 
 ## Urgent 🚨
 
+- [ ] email template Vazirmatn font
+- [ ] Email template icons
 - [ ] Image not found
-- [ ] Eliminate render-blocking resources index.css
 
 ## Articles
 
