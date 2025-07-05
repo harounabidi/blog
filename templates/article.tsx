@@ -42,11 +42,24 @@ function Head({ url, article }: { url: string; article: Article }) {
         name='format-detection'
         content='telephone=no, date=no, address=no, email=no, url=no'
       />
+
       <meta name='x-apple-disable-message-reformatting' />
       <meta name='color-scheme' content='light dark' />
       <meta name='supported-color-schemes' content='light dark' />
       <title>New Article: {article.title}</title>
       <link rel='icon' type='image/x-icon' href={`${url}/favicon.ico`} />
+
+      {/* <link rel='preconnect' href='https://fonts.googleapis.com' />
+      <link
+        rel='preconnect'
+        href='https://fonts.gstatic.com'
+        crossorigin='anonymous'
+      />
+      <link
+        href='https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap'
+        rel='stylesheet'
+      /> */}
+
       {html`<!--[if mso]>
         <noscript>
           <xml>
@@ -283,7 +296,7 @@ function Body({
                       </tr>
                     </table>
 
-                    <SocialLinks />
+                    {/* <SocialLinks /> */}
                   </div>
                 </td>
               </tr>

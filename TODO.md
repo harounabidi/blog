@@ -3,8 +3,8 @@
 ## Urgent 🚨
 
 - [ ] email template Vazirmatn font
-- [ ] Email template icons
 - [ ] Image not found
+- [ ] CSS optimization (TBT)
 
 ## Articles
 

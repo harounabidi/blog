@@ -4,7 +4,6 @@ import GitHub from "../icons/github"
 import Linkedin from "../icons/linkedin"
 import Subscribe from "../subscribe"
 import RSS from "../icons/rss"
-import Codepen from "../icons/codepen"
 
 export default function Footer({ categories }: { categories: Category[] }) {
   return (
@@ -14,7 +13,7 @@ export default function Footer({ categories }: { categories: Category[] }) {
         <div class='flex w-full py-5 gap-4'>
           <div class='flex gap-2 flex-col w-full items-start justify-start'>
             <p class='mb-4 font-bold capitalize'>Categories</p>
-            {categories.map((category) => (
+            {categories.slice(0, 5).map((category) => (
               <a
                 href={`/${category.slug}`}
                 key={category.id}
@@ -22,6 +21,9 @@ export default function Footer({ categories }: { categories: Category[] }) {
                 {category.name}
               </a>
             ))}
+            <a href='/' class='text-sm hover:underline py-0.5'>
+              All categories
+            </a>
           </div>
           <div class='flex gap-2 flex-col w-full items-end justify-start'>
             <p class='mb-4 font-bold capitalize'>General</p>

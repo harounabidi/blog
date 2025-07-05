@@ -47,13 +47,6 @@ export default function Sun(props: JSX.HTMLAttributes) {
             values='2;0'
           />
         </path>
-        <animateTransform
-          attributeName='transform'
-          dur='30s'
-          repeatCount='indefinite'
-          type='rotate'
-          values='0 12 12;360 12 12'
-        />
       </g>
       <mask id='lineMdMoonFilledAltToSunnyFilledLoopTransition0'>
         <circle cx='12' cy='12' r='12' fill='#fff' />

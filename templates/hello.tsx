@@ -296,7 +296,7 @@ function Body({
                       </tr>
                     </table>
 
-                    <SocialLinks />
+                    {/* <SocialLinks /> */}
                   </div>
                 </td>
               </tr>

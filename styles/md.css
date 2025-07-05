@@ -77,7 +77,17 @@
   padding-inline-start: 0.75em;
 }
 
+#article ol {
+  list-style: decimal;
+  list-style-position: inside;
+  padding-inline-start: 0.75em;
+}
+
 #article ul li::marker {
+  color: var(--color-foreground-muted);
+}
+
+#article ol li::marker {
   color: var(--color-foreground-muted);
 }
 
@@ -92,6 +102,6 @@
   border-radius: var(--radius-sm);
   aspect-ratio: 1.91 / 1;
   width: 100%;
-  margin-bottom: calc(var(--spacing) * 6);
+  margin-bottom: 0.5rem;
   border: 0.75px solid var(--pre-border-color);
 }

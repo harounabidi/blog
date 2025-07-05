@@ -1,7 +1,7 @@
 import { Router } from "../../server/app"
 import { drizzle } from "drizzle-orm/d1"
 import { category, article } from "@/schemas/drizzle"
-import { eq } from "drizzle-orm"
+import { eq, desc } from "drizzle-orm"
 import HomePage from "../pages"
 
 const router = Router()
@@ -29,7 +29,7 @@ router.get("/", async (c) => {
     })
     .from(article)
     .innerJoin(category, eq(article.categoryId, category.id))
-    .orderBy(article.createdAt)
+    .orderBy(desc(article.publishedAt))
 
   // return the markup from kv
   // const cachedHomePage = await c.env.KV.get("home")
