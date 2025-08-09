@@ -76,6 +76,28 @@ marked.use({
         ${imgTag}
       </div>`
     },
+    blockquote(token) {
+      const text = this.parser.parse(token.tokens!)
+
+      // Check for callout patterns - handle both single line and multi-line cases
+      const calloutRegex = /\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i
+      const match = text.match(calloutRegex)
+
+      if (match) {
+        const calloutType = match[1].toLowerCase()
+        // Remove the callout marker from the content
+        let content = text.replace(
+          /\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*/i,
+          ""
+        )
+        // Remove any <br> tags that appear at the beginning of <p> tags
+        content = content.replace(/<p><br>/gi, "<p>")
+        return `<blockquote class="${calloutType}">${content}</blockquote>\n`
+      }
+
+      // Default blockquote rendering
+      return `<blockquote>\n${text}</blockquote>\n`
+    },
   },
 })
 
@@ -103,6 +125,7 @@ const sanitizeHtmlOptions = {
     label: ["for", "class", "style"],
     ul: ["class", "style"],
     li: ["class", "style"],
+    blockquote: ["class", "style"],
   },
 }
 

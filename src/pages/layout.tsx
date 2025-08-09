@@ -133,10 +133,12 @@ function Head({
 
       <meta name='twitter:image:alt' content="Haroun Abidi's Blog" />
 
+      {/* Requests are blocking the page's initial render, which may delay LCP. Deferring or inlining can move these network requests out of the critical path.LCP FCP */}
+
       <link href='/css/index.css' rel='stylesheet' />
 
       <link
-        href={`${theme === "dark" ? "/css/vs-dark.css" : "/css/vs-light.css"}`}
+        href='/css/vs-code.css'
         rel='stylesheet'
         media='print'
         onload="this.media='all'"
@@ -158,7 +160,7 @@ function Head({
         crossorigin='anonymous'
       />
 
-      <script src='/script.js' type='module'></script>
+      <script src='/script.js' type='module' defer></script>
 
       <link
         rel='icon'

@@ -1,7 +1,7 @@
 import { Router } from "@/server/app"
 import { drizzle } from "drizzle-orm/d1"
 import { category, article, subscriber } from "@/schemas/drizzle"
-import { eq } from "drizzle-orm"
+import { eq, desc } from "drizzle-orm"
 import { mail } from "@/utils/mail"
 import { encryptWithPassword, decryptWithPassword } from "@/utils/hash"
 import helloNewSubscriber from "@/templates/hello"
@@ -73,8 +73,8 @@ router.post("/subscribe", async (c) => {
     })
     .from(article)
     .innerJoin(category, eq(article.categoryId, category.id))
-    .orderBy(article.createdAt)
-    .limit(5)
+    .orderBy(desc(article.publishedAt))
+    .limit(3)
 
   // Encrypt email for unsubscribe link
   const encryptedEmail = await encryptWithPassword(email, c.env.ENCRYPTION_KEY)

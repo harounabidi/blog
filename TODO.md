@@ -2,6 +2,7 @@
 
 ## Urgent 🚨
 
+- [ ] Do not delete subscriber from database if unsubscribed
 - [ ] email template Vazirmatn font
 - [ ] Image not found
 - [ ] CSS optimization (TBT)

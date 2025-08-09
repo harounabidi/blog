@@ -29,26 +29,6 @@ export class ThemeManager {
     }
   }
 
-  private updateThemeLinks(isDarkMode: boolean): void {
-    // Remove existing theme stylesheets
-    const existingDarkLink = document.querySelector(
-      'link[href*="vs-dark"][rel="stylesheet"]'
-    )
-    const existingLightLink = document.querySelector(
-      'link[href*="vs-light"][rel="stylesheet"]'
-    )
-
-    existingDarkLink?.remove()
-    existingLightLink?.remove()
-
-    // Load the appropriate theme CSS
-    const themeFile = isDarkMode ? "/css/vs-dark.css" : "/css/vs-light.css"
-    const link = document.createElement("link")
-    link.rel = "stylesheet"
-    link.href = themeFile
-    document.head.appendChild(link)
-  }
-
   private setCookie(name: string, value: string, days: number = 365): void {
     const expires = new Date()
     expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000)
@@ -63,7 +43,6 @@ export class ThemeManager {
     const newTheme: Theme = isDarkMode ? "dark" : "light"
 
     this.updateIconsVisibility(isDarkMode)
-    this.updateThemeLinks(isDarkMode)
 
     // Update the theme cookie
     this.setCookie("theme", newTheme)
@@ -75,7 +54,6 @@ export class ThemeManager {
 
     const isDarkMode = html.classList.contains("dark")
     this.updateIconsVisibility(isDarkMode)
-    this.updateThemeLinks(isDarkMode)
 
     // Setup theme toggle listener
     this.elements.themeToggle?.addEventListener("click", async () => {
