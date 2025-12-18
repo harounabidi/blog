@@ -28,6 +28,7 @@ function Head({
     <head>
       <meta charSet='utf-8' />
       <meta name='viewport' content='width=device-width, initial-scale=1' />
+      <link href='/css/index.css' rel='stylesheet' fetchpriority='high' />
       <title>{props.title || "Haroun Abidi"}</title>
       <meta
         name='description'
@@ -132,8 +133,6 @@ function Head({
       <meta name='twitter:image' content={props.image || "/og"} />
 
       <meta name='twitter:image:alt' content="Haroun Abidi's Blog" />
-
-      <link href='/css/index.css' rel='stylesheet' />
 
       <link
         rel='preload'
