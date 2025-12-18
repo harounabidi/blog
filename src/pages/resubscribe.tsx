@@ -15,7 +15,7 @@ export default async function Resubscribe() {
         <link rel='preload' href='/css/index.css' as='style' />
       </head>
       <body>
-        <main class='max-w-[45rem] w-full space-y-4 my-8 mx-auto px-4'>
+        <main class='max-w-180 w-full space-y-4 my-8 mx-auto px-4'>
           <h1 class='text-lg font-semibold'>Haroun Abidi</h1>
           <p>Welcome Back!</p>
           <a

@@ -7,10 +7,6 @@ export default async function Unsubscribed({
   email: string
   key: string
 }) {
-  const emailInitials = email.split("@")[0].slice(0, 3)
-  const emailDomain = email.split("@")[1]
-  const emailDisplay = `${emailInitials}...@${emailDomain}`
-
   const encryptedEmail = await encryptWithPassword(email, key)
   return (
     <html lang='en'>
@@ -28,7 +24,7 @@ export default async function Unsubscribed({
         <link rel='preload' href='/css/index.css' as='style' />
       </head>
       <body>
-        <main class='max-w-[45rem] w-full space-y-4 my-8 mx-auto px-4'>
+        <main class='max-w-180 w-full space-y-4 my-8 mx-auto px-4'>
           <h1 class='text-lg font-semibold'>Haroun Abidi</h1>
           <p>You have been successfully unsubscribed, Didn't meant to?</p>
           <form action={`/resubscribe/${encryptedEmail}`} method='post'>

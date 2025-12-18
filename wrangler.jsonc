@@ -4,7 +4,12 @@
   "main": "src/index.tsx",
   "compatibility_date": "2025-05-25",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "upload_source_maps": false,
   "minify": true,
+  "dev": {
+    "ip": "0.0.0.0",
+    "port": 3000
+  },
   "assets": {
     "binding": "ASSETS",
     "directory": "dist"
@@ -24,5 +29,12 @@
   ],
   "observability": {
     "enabled": true
-  }
+  },
+  "routes": [
+    {
+      "custom_domain": true,
+      "pattern": "harounabidi.com",
+      "zone_name": "harounabidi.com"
+    }
+  ]
 }

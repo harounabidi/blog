@@ -19,20 +19,25 @@ A modern blog platform built with Cloudflare, Hono, Drizzle ORM, Bun, and React/
 - **Drizzle ORM**: Database migrations and queries
 - **Bun**: Fast JavaScript runtime
 - **React/TypeScript**: UI components
-- **PrismJS**: Syntax highlighting
+- **Sugar High**: Syntax highlighting
 - **Marked**: Markdown parsing
 
 ## Getting Started
 
 1. **Install dependencies**
+
    ```sh
    bun install
    ```
+
 2. **Run the development server**
+
    ```sh
    bun run dev
    ```
+
 3. **Build for production**
+
    ```sh
    bun run build
    ```
@@ -43,7 +48,6 @@ A modern blog platform built with Cloudflare, Hono, Drizzle ORM, Bun, and React/
 - `drizzle/` - Database migrations
 - `fonts/` - Custom font files
 - `schemas/` - Drizzle ORM schemas
-- `scripts/` - Build and utility scripts
 - `server/` - Server-side logic
 - `src/` - Main app source code
 - `styles/` - CSS styles
@@ -55,7 +59,7 @@ A modern blog platform built with Cloudflare, Hono, Drizzle ORM, Bun, and React/
 
 Use blockquotes with callout markers:
 
-```
+```plaintext
 > [!NOTE]
 > This is a note.
 > [!TIP]

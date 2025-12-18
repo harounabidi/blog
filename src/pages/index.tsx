@@ -15,7 +15,7 @@ export default function Home({
 }) {
   return (
     <Layout c={c}>
-      <section class='max-w-[45rem] my-2 mx-auto px-4'>
+      <section class='max-w-180 my-2 mx-auto px-4'>
         <h1 class='lg:text-3xl text-2xl font-bold mt-4'>All articles</h1>
         <Articles articles={articles} />
       </section>

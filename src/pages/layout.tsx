@@ -133,22 +133,13 @@ function Head({
 
       <meta name='twitter:image:alt' content="Haroun Abidi's Blog" />
 
-      {/* Requests are blocking the page's initial render, which may delay LCP. Deferring or inlining can move these network requests out of the critical path.LCP FCP */}
-
       <link href='/css/index.css' rel='stylesheet' />
-
-      <link
-        href='/css/vs-code.css'
-        rel='stylesheet'
-        media='print'
-        onload="this.media='all'"
-      />
 
       <link
         rel='preload'
         as='font'
         type='font/woff2'
-        href='/fonts/Vazirmatn-Regular.woff2'
+        href='https://fonts.gstatic.com/s/vazirmatn/v16/Dxxo8j6PP2D_kU2muijlGMWWIGroe7ll.woff2'
         crossorigin='anonymous'
       />
 
@@ -156,7 +147,7 @@ function Head({
         rel='preload'
         as='font'
         type='font/woff2'
-        href='/fonts/Vazirmatn-Bold.woff2'
+        href='https://fonts.gstatic.com/s/vazirmatn/v16/Dxxo8j6PP2D_kU2muijlHcWWIGroew.woff2'
         crossorigin='anonymous'
       />
 
@@ -164,40 +155,40 @@ function Head({
 
       <link
         rel='icon'
-        href='/favicon/favicon.ico'
+        href='/favicons/favicon.ico'
         type='image/x-icon'
         sizes='48x48'
       />
       <link
         rel='apple-touch-icon'
-        href='/favicon/apple-touch-icon.png'
+        href='/favicons/apple-touch-icon.png'
         type='image/png'
         sizes='180x180'
       />
       <link
         rel='icon'
-        href='/favicon/favicon-32x32.png'
+        href='/favicons/favicon-32x32.png'
         type='image/png'
         sizes='32x32'
       />
 
       <link
         rel='icon'
-        href='/favicon/favicon-16x16.png'
+        href='/favicons/favicon-16x16.png'
         type='image/png'
         sizes='16x16'
       />
 
       <link
         rel='icon'
-        href='/favicon/android-chrome-192x192.png'
+        href='/favicons/android-chrome-192x192.png'
         type='image/png'
         sizes='192x192'
       />
 
       <link
         rel='icon'
-        href='/favicon/android-chrome-512x512.png'
+        href='/favicons/android-chrome-512x512.png'
         type='image/png'
         sizes='512x512'
       />

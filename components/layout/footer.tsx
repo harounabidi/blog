@@ -4,10 +4,11 @@ import GitHub from "../icons/github"
 import Linkedin from "../icons/linkedin"
 import Subscribe from "../subscribe"
 import RSS from "../icons/rss"
+import Discord from "../icons/discord"
 
 export default function Footer({ categories }: { categories: Category[] }) {
   return (
-    <footer class='flex border-t py-4 gap-4 flex-col mt-auto max-w-[45rem] mx-auto items-center justify-between px-4 w-full'>
+    <footer class='flex border-t py-4 gap-4 flex-col mt-auto max-w-180 mx-auto items-center justify-between px-4 w-full'>
       <div class='flex border-b pb-3 flex-col sm:flex-row w-full sm:items-start items-center justify-between sm:gap-16'>
         <Subscribe />
         <div class='flex w-full py-5 gap-4'>
@@ -66,6 +67,13 @@ export default function Footer({ categories }: { categories: Category[] }) {
             target='_blank'
             rel='noopener noreferrer'>
             <Linkedin class='w-5.5 h-5.5' />
+          </a>
+          <a
+            href='https://discord.com/users/1079402003207299184'
+            aria-label='Discord'
+            target='_blank'
+            rel='noopener noreferrer'>
+            <Discord class='w-5.5 h-5.5' />
           </a>
           <span>•</span>
           <a

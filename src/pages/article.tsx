@@ -31,7 +31,7 @@ export default function Article({
       <section
         dir={article.language === "ar" ? "rtl" : "ltr"}
         id='article'
-        class='max-w-[45rem] mx-auto px-4'>
+        class='max-w-180 mx-auto px-4'>
         <h1>{article.title}</h1>
         <p class='text-sm text-foreground-muted'>
           {new Date(article.createdAt).toLocaleDateString(

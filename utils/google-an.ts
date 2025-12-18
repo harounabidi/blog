@@ -12,6 +12,7 @@ export default function googleAnalytics() {
       }
       gtag("js", new Date())
       gtag("config", "G-ZM85HNP5JN")
+    
     </script>
   `
 }

@@ -1,1 +1,0 @@
-This folder contains the built output assets for the worker "blog" generated at 2025-07-01T13:51:20.499Z.

@@ -18,7 +18,7 @@ export default function Category({
 }) {
   return (
     <Layout c={c} title={category.name}>
-      <section class='max-w-[45rem] my-2 mx-auto px-4'>
+      <section class='max-w-180 my-2 mx-auto px-4'>
         <h1 class='lg:text-3xl text-2xl font-bold mt-4'>{category.name}</h1>
         <Articles articles={articles} />
       </section>

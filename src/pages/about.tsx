@@ -12,7 +12,7 @@ export default function About(
       c={c}
       description='A blog about web development, programming, and more.'
       keywords='Haroun Abidi, software developer, ecommerce platforms, backend systems, Algeria, Hono.js, Cloudflare Workers, Next.js, React Native, distributed systems'>
-      <section class='max-w-[45rem] space-y-4 my-2 mx-auto px-4'>
+      <section class='max-w-180 space-y-4 my-2 mx-auto px-4'>
         <h1 class='text-3xl mt-4 font-bold'>About This Blog</h1>
         <p>
           Hey! I’m Haroun, and I’m really glad you found your way here. This

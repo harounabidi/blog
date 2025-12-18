@@ -30,7 +30,7 @@ export default function Error(c: Context<{ Bindings: Env }>) {
           <link rel='preload' href='/css/index.css' as='style' />
         </head>
         <body class='bg-background text-foreground'>
-          <main class='max-w-[45rem] h-svh grid place-items-center my-4 mx-auto px-4'>
+          <main class='max-w-180 h-svh grid place-items-center my-4 mx-auto px-4'>
             <div class='flex flex-col items-center text-center'>
               <h1 class='text-3xl font-bold mb-4'>Something went wrong 😢</h1>
               <p class='text-lg text-foreground-muted'>

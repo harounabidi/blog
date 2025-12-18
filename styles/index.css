@@ -1,14 +1,27 @@
 @import "tailwindcss";
 @import "./md.css";
-@import "./fonts.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* body * {
-  transition: background-color 0.2s ease-in-out;
-} */
-
 @layer base {
+  @font-face {
+    font-family: "Vazirmatn";
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/vazirmatn/v16/Dxxo8j6PP2D_kU2muijlGMWWIGroe7ll.woff2)
+      format("woff2");
+  }
+
+  @font-face {
+    font-family: "Vazirmatn";
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/vazirmatn/v16/Dxxo8j6PP2D_kU2muijlHcWWIGroew.woff2)
+      format("woff2");
+  }
+
   *,
   ::after,
   ::before,
@@ -19,6 +32,8 @@
 }
 
 :root {
+  interpolate-size: allow-keywords;
+
   --background-color: hsl(0, 0%, 100%);
   --foreground-color: hsl(0, 0%, 17%);
 
@@ -33,7 +48,20 @@
 
   --border-color: hsl(0, 0%, 90%);
 
-  interpolate-size: allow-keywords;
+  --code-text: hsl(228, 18%, 45%);
+  --code-bg: hsl(0, 0%, 98%);
+  --code-selection: hsl(230, 39%, 91%);
+  --code-inline: hsl(14, 71%, 46%);
+
+  --sh-class: #2d5e9d;
+  --sh-identifier: #354150;
+  --sh-sign: #8996a3;
+  --sh-property: #0550ae;
+  --sh-entity: #089d98;
+  --sh-jsxliterals: #6266d1;
+  --sh-string: #00a99a;
+  --sh-keyword: #f47067;
+  --sh-comment: #a19595;
 }
 
 .dark {
@@ -50,6 +78,21 @@
   --pre-border-color: hsl(0, 0%, 20%);
 
   --border-color: hsl(0, 0%, 20%);
+
+  --code-text: hsl(0, 0%, 83%);
+  --code-bg: hsl(0, 0%, 12%);
+  --code-selection: hsl(210, 52%, 31%);
+  --code-inline: hsl(348, 67%, 58%);
+
+  --sh-class: #4ea1ff;
+  --sh-identifier: #cbd2e8;
+  --sh-sign: #6c7086;
+  --sh-property: #82cfff;
+  --sh-entity: #3ddbd9;
+  --sh-jsxliterals: #b4b7ff;
+  --sh-string: #4fd1c5;
+  --sh-keyword: #ff938a;
+  --sh-comment: #6c7086;
 }
 
 @theme {
@@ -66,6 +109,39 @@
   [popover]::backdrop {
     background-color: var(--backdrop);
     backdrop-filter: blur(4px);
+  }
+
+  pre[class*="language-"],
+  code[class*="language-"] {
+    color: var(--code-text);
+    font-size: 14px;
+    text-shadow: none;
+    font-family: Monaco, Menlo, Courier, "Courier New", "Ubuntu Mono", monospace;
+    direction: ltr;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    line-height: 1.5;
+    -moz-tab-size: 2;
+    -o-tab-size: 2;
+    tab-size: 2;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  pre {
+    position: relative;
+    margin: 0;
+    padding: 16px;
+    /* padding-inline-start: 40px; */
+    border: 0.75px solid var(--pre-border-color);
+    background-color: var(--pre-background-color);
+    border-radius: 4px;
+    overflow-x: auto;
+    margin-block: 1em;
   }
 }
 

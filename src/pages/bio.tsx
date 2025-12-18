@@ -12,7 +12,7 @@ export default function Bio(
       c={c}
       description='I’m Haroun Abidi, a software developer from Algeria. I build ecommerce platforms and backend systems that connect to real-world business needs.'
       keywords='Haroun Abidi, software developer, ecommerce platforms, backend systems, Algeria, Hono.js, Cloudflare Workers, Next.js, React Native, distributed systems'>
-      <section class='max-w-[45rem] space-y-4 my-2 mx-auto px-4'>
+      <section class='max-w-180 space-y-4 my-2 mx-auto px-4'>
         <div
           class='my-6 image rounded-full ring-2 w-28 ring-foreground-muted h-28'
           style={{
