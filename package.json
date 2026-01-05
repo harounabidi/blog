@@ -17,10 +17,9 @@
     "db:studio:local": "drizzle-kit studio --config=drizzle.config.local.ts"
   },
   "dependencies": {
-    "@tailwindcss/cli": "^4.1.18",
     "@tailwindcss/postcss": "^4.1.18",
     "drizzle-orm": "^0.44.7",
-    "hono": "^4.11.1",
+    "hono": "^4.11.3",
     "marked": "^16.4.2",
     "marked-highlight": "^2.2.3",
     "postcss": "^8.5.6",

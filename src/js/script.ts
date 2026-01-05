@@ -4,19 +4,15 @@ import { SubscribeToNewsletter } from "./subscribe-newsletter.js"
 import { CategoriesScrollManager } from "./categories-scroll-manager.js"
 import Image from "./image.js"
 
-// Wait for both DOM and stylesheets to be ready
 const initializeApp = async () => {
-  // Ensure all stylesheets are loaded
   await Promise.all(
     Array.from(document.styleSheets).map((sheet) => {
       if (sheet.href) {
         return new Promise<void>((resolve) => {
-          // If already loaded, resolve immediately
           try {
-            sheet.cssRules // Test if accessible
+            sheet.cssRules
             resolve()
           } catch {
-            // Wait for load event
             const link = document.querySelector(`link[href="${sheet.href}"]`)
             if (link) {
               link.addEventListener("load", () => resolve(), { once: true })
@@ -39,6 +35,15 @@ const initializeApp = async () => {
   scrollHeaderManager.init()
   subscribeToNewsletter.init()
   categoriesScrollManager.init()
+
+  const nav = document.querySelector("nav")
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 10) {
+      nav?.setAttribute("data-scrolled", "true")
+    } else {
+      nav?.removeAttribute("data-scrolled")
+    }
+  })
 
   Image()
 }

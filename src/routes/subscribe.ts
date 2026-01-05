@@ -106,9 +106,7 @@ router.post("/subscribe", async (c) => {
 })
 
 router.get("/unsubscribe/:email", async (c) => {
-  const db = drizzle(c.env.DB)
   const encryptedEmail = c.req.param("email")
-  const categories = await db.select().from(category).orderBy(category.name)
 
   if (!encryptedEmail) {
     return c.json({ error: "Email is required" }, 400)
@@ -116,7 +114,6 @@ router.get("/unsubscribe/:email", async (c) => {
 
   let email: string
   try {
-    // Decrypt the email parameter
     email = await decryptWithPassword(encryptedEmail, c.env.ENCRYPTION_KEY)
   } catch (error) {
     return c.json({ error: "Invalid email parameter" }, 400)
@@ -140,7 +137,6 @@ router.post("/unsubscribe/:email", async (c) => {
 
   let email: string
   try {
-    // Decrypt the email parameter
     email = await decryptWithPassword(encryptedEmail, c.env.ENCRYPTION_KEY)
   } catch (error) {
     return c.json({ error: "Invalid email parameter" }, 400)
@@ -160,7 +156,10 @@ router.post("/unsubscribe/:email", async (c) => {
     )
   }
 
-  await db.delete(subscriber).where(eq(subscriber.email, email))
+  await db
+    .update(subscriber)
+    .set({ active: 0, updatedAt: Date.now() })
+    .where(eq(subscriber.email, email))
 
   return c.html(
     Unsubscribed({
@@ -190,19 +189,19 @@ router.post("/resubscribe/:email", async (c) => {
     .from(subscriber)
     .where(eq(subscriber.email, email))
 
-  if (existingSubscriber.length > 0) {
+  if (existingSubscriber.length === 0) {
+    return c.json({ error: "Email not found" }, 400)
+  }
+
+  if (existingSubscriber[0]?.active === 1) {
     return c.json({ error: "Email already subscribed" }, 400)
   }
 
-  const newSubscriber = {
-    id: crypto.randomUUID(),
-    email,
-    createdAt: Date.now(),
-    updatedAt: Date.now(),
-  }
-
   try {
-    await db.insert(subscriber).values(newSubscriber)
+    await db
+      .update(subscriber)
+      .set({ active: 1, updatedAt: Date.now() })
+      .where(eq(subscriber.email, email))
   } catch (error) {
     console.error("Resubscription error:", error)
     return c.json({ error: "Failed to resubscribe" }, 500)

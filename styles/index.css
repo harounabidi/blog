@@ -33,6 +33,7 @@
 
 :root {
   interpolate-size: allow-keywords;
+  color-scheme: light dark;
 
   --background-color: hsl(0, 0%, 100%);
   --foreground-color: hsl(0, 0%, 17%);

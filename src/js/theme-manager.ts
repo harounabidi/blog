@@ -43,9 +43,23 @@ export class ThemeManager {
     const newTheme: Theme = isDarkMode ? "dark" : "light"
 
     this.updateIconsVisibility(isDarkMode)
-
-    // Update the theme cookie
     this.setCookie("theme", newTheme)
+
+    const metaThemeColor = document.querySelector("meta[name='theme-color']")
+    const body = document.body
+    body.style.backgroundColor = newTheme === "dark" ? "#1a1a1a" : "#ffffff"
+
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute(
+        "content",
+        newTheme === "dark" ? "#1a1a1a" : "#ffffff"
+      )
+    } else {
+      const meta = document.createElement("meta")
+      meta.name = "theme-color"
+      meta.content = newTheme === "dark" ? "#1a1a1a" : "#ffffff"
+      document.head.appendChild(meta)
+    }
   }
 
   public init(): void {

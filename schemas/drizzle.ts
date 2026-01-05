@@ -31,4 +31,5 @@ export const subscriber = sqliteTable("subscriber", {
   email: text("email").notNull().unique(),
   createdAt: integer("created_at").notNull().default(Date.now()),
   updatedAt: integer("updated_at").notNull().default(Date.now()),
+  active: integer("active").notNull().default(1),
 })

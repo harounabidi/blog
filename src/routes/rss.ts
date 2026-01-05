@@ -54,7 +54,7 @@ router.get("/rss.xml", async (c) => {
         <category>Programming</category>
         <category>Web Development</category>
         <image>
-          <url>${baseUrl}/favicon/favicon-32x32.png</url>
+          <url>${baseUrl}/favicons/favicon-32x32.png</url>
           <title>Haroun Abidi's Blog</title>
           <link>${baseUrl}</link>
         </image>

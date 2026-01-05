@@ -10,7 +10,6 @@ type Theme = "dark" | "light"
 
 function Head({
   props,
-  theme,
 }: {
   props: {
     title?: string
@@ -22,7 +21,6 @@ function Head({
     updatedAt?: string
     categories?: string[]
   }
-  theme: Theme
 }) {
   return (
     <head>
@@ -41,22 +39,22 @@ function Head({
         name='keywords'
         content={props.keywords || "Next.js, React, CSS, Animation, and more!"}
       />
+
       <link
         rel='canonical'
         href={props.canonical || "https://harounabidi.com"}
       />
 
-      {/* <meta
-        name='theme-color'
-        media='(prefers-color-scheme: dark)'
-        content='#1a1a1a'
-      />
-
       <meta
         name='theme-color'
-        media='(prefers-color-scheme: light)'
         content='#ffffff'
-      /> */}
+        media='(prefers-color-scheme: light)'
+      />
+      <meta
+        name='theme-color'
+        content='#1a1a1a'
+        media='(prefers-color-scheme: dark)'
+      />
 
       <link
         rel='alternate'
@@ -217,7 +215,7 @@ const Layout: FC = async (props) => {
     <>
       {html`<!DOCTYPE html>`}
       <html lang='en' class={theme === "dark" ? "dark" : ""}>
-        <Head props={props} theme={theme} />
+        <Head props={props} />
         <body>
           <div id='main-content' class='w-full'>
             <Header categories={categories} c={props.c} />

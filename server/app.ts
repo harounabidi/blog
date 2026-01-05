@@ -8,6 +8,7 @@ import { eq } from "drizzle-orm"
 import { middleware } from "./middleware"
 import Error from "@/src/pages/error"
 import Image from "@/components/image"
+import { getCookie } from "hono/cookie"
 
 export function Router() {
   return new Hono<{ Bindings: Env }>({
@@ -50,7 +51,7 @@ export default function App() {
   })
 
   app.get("/manifest.webmanifest", (c) => {
-    // const theme = getCookie(c, "theme")
+    const theme = getCookie(c, "theme")
     return c.json(
       {
         name: "Haroun Abidi's Blog",
@@ -58,27 +59,27 @@ export default function App() {
         description: "A blog about web development, programming, and more.",
         start_url: "/",
         display: "standalone",
-        // background_color:
-        //   theme === "dark" ? "hsl(0, 0%, 10%)" : "hsl(0, 0%, 100%)",
-        // theme_color: theme === "dark" ? "hsl(0, 0%, 10%)" : "hsl(0, 0%, 100%)",
+        background_color:
+          theme === "dark" ? "hsl(0, 0%, 10%)" : "hsl(0, 0%, 100%)",
+        theme_color: theme === "dark" ? "hsl(0, 0%, 10%)" : "hsl(0, 0%, 100%)",
         icons: [
           {
-            src: "/favicon/android-chrome-192x192.png",
+            src: "/favicons/android-chrome-192x192.png",
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "/favicon/android-chrome-512x512.png",
+            src: "/favicons/android-chrome-512x512.png",
             sizes: "512x512",
             type: "image/png",
           },
           {
-            src: "/favicon/favicon-32x32.png",
+            src: "/favicons/favicon-32x32.png",
             sizes: "32x32",
             type: "image/png",
           },
           {
-            src: "/favicon/favicon-16x16.png",
+            src: "/favicons/favicon-16x16.png",
             sizes: "16x16",
             type: "image/png",
           },
